@@ -16,6 +16,44 @@ Para instalar el módulo en Rocketbot Studio, se puede hacer de dos formas:
 2. Automática: Al ingresar a Rocketbot Studio sobre el margen derecho encontrara la sección de **Addons**, seleccionar **Install Mods**, buscar el modulo deseado y presionar install.  
 
 
+
+## Como usar este modulo
+
+Antes de usar este módulo, es necesario instalar dos herramientas:
+
+1. Instalar yt-dlp
+
+    1.1 Descargar el archivo yt-dlp.exe desde:
+https://github.com/yt-dlp/yt-dlp/releases/latest
+
+    1.2 Crear una carpeta y colocar el ejecutable dentro, por ejemplo:
+
+        C:\yt-dlp\yt-dlp.exe
+
+    1.3 Añadir esta carpeta a la ruta del sistema:
+
+    Sistema → Variables de entorno → Editar PATH →     Añadir
+
+        C:\yt-dlp
+
+2. Instalar FFmpeg
+
+    2.1 Ir a la pagina:
+https://www.gyan.dev/ffmpeg/builds/
+
+    y descargar el .zip:
+
+        ffmpeg-release-essentials.zip
+
+    2.2 Extraer en una carpeta, por ejemplo:
+
+        C:\ffmpeg\
+
+    2.3 Añadir al PATH:
+
+        C:\ffmpeg\bin
+
+
 ## Descripción de los comandos
 
 ### Descargar Video
@@ -24,11 +62,10 @@ Descarga un video desde una URL, permitiendo definir calidad, proxy y ruta de sa
 |Parámetros|Descripción|ejemplo|
 | --- | --- | --- |
 |URL|Enlace completo del video a descargar.|https://www.youtube.com/watch?v=PnMMBJiT338|
-|Plantilla de salida|Ruta, nombre del archivo a guardar. Soporta variables internas de yt-dlp, para titulo original y extension usar %(title)s.%(ext)s.|C:/Videos/%(title)s.%(ext)s|
+|Ruta de salida|Ruta de la carpeta donde se descargará el video.|C:/Users/User/Videos|
 |Calidad|Calidad específica del video. Ejecutar el comando Listar Formatos para ver las calidades disponibles para un video específico. Por default se descargará la mejor calidad disponible.|best|
-|Proxy|Proxy HTTP/HTTPS para la descarga.|http://user:pass@127.0.0.1:8080|
+|Ruta a yt-dlp|Opcional. Ruta al ejecutable yt-dlp.|C:/Tools/yt-dlp.exe|
 |Asignar resultado a Variable|Variable donde se almacenará True o False dependiendo del éxito del comando.|Variable|
-|Extra data|Variable donde se almacenará el JSON completo del video descargado.|Variable|
 
 ### Descargar Audio
   
@@ -36,10 +73,9 @@ Descarga el audio de un video desde una URL, y lo convierte al formato deseado.
 |Parámetros|Descripción|ejemplo|
 | --- | --- | --- |
 |URL|Enlace completo del audio a descargar.|https://www.youtube.com/watch?v=PnMMBJiT338|
-|Plantilla de salida|Ruta, nombre del archivo a guardar. Soporta variables internas de yt-dlp, para titulo original y extension usar %(title)s.%(ext)s.|C:/Audios/%(title)s.%(ext)s|
+|Ruta de salida|Ruta hacia la carpeta donde se descargará el audio.|C:/Users/User/Audios|
 |Formato de Audio|Formato específico del audio. Ejecutar el comando Listar Formatos para ver las opciones disponibles para un audio específico. Por default se descargará la mejor calidad disponible.|mp3|
 |Asignar resultado a Variable|Variable donde se almacenará True o False dependiendo del éxito del comando.|Variable|
-|Extra data|Variable donde se almacenará el JSON completo del audio descargado.|Variable|
 
 ### Descargar Playlist
   
@@ -47,9 +83,8 @@ Descarga todos los videos de una playlist.
 |Parámetros|Descripción|ejemplo|
 | --- | --- | --- |
 |URL|Enlace completo de la playlist descargar.|https://www.youtube.com/watch?v=PnMMBJiT338|
-|Plantilla de salida|Ruta, nombre del archivo a guardar. Soporta variables internas de yt-dlp, para titulo original y extension usar %(title)s.%(ext)s.|C:/Users/User/Playlists/%(playlist)s/%(title)s.%(ext)s|
+|Ruta de descarga|Ruta hacia la carpeta donde se descargarán los archivos.|C:/Users/User/Playlists|
 |Asignar resultado a Variable|Variable donde se almacenará True o False dependiendo del éxito del comando.|Variable|
-|Extra data|Variable donde se almacenará el JSON completo de la playlist descargada.|Variable|
 
 ### Listar Formatos
   
@@ -57,6 +92,7 @@ Lista todos los formatos disponibles para un video.
 |Parámetros|Descripción|ejemplo|
 | --- | --- | --- |
 |URL|Enlace completo del video.|https://www.youtube.com/watch?v=PnMMBJiT338|
+|Ruta a yt-dlp|Opcional. Ruta de la carpeta donde se encuentra yt-dlp.|C:/Tools/yt-dlp|
 |Asignar resultado a Variable|Variable donde se almacenará el resultado del comando.|Variable|
 
 ### Obtener Metadata
@@ -81,9 +117,8 @@ Descarga subtítulos manuales en idioma específico.
 |Parámetros|Descripción|ejemplo|
 | --- | --- | --- |
 |URL|Enlace completo del video.|https://www.youtube.com/watch?v=PnMMBJiT338|
-|Ruta de salida|Ruta donde se guardarán los subtítulos.|C:/Users/User/Subtitulos|
+|Ruta de salida|Ruta haciala carpeta donde se descargarán los subtítulos.|C:/Users/User/Subtitulos|
 |Formato de salida|Formato en el que se descargarán los subtítulos (ej srt, vtt, lrc, best, ass), por default es srt.|srt|
-|Archivo de Cookies|Ruta al archivo de cookies de la página del video, se puede obtener con la extensión Get cookies txt https//goo.su/Grmma|C:/Subtitulos/cookies.txt|
 |Idioma|Código del idioma (ej es, en, fr). Ejecutar el comando 'Subtítulos disponibles' para ver los códigos de idiomas disponibles para un video.|es|
 |Asignar resultado a Variable|Variable donde se almacenará True o False dependiendo del éxito del comando.|Variable|
 
@@ -93,8 +128,7 @@ Descarga subtítulos automáticos en idioma específico.
 |Parámetros|Descripción|ejemplo|
 | --- | --- | --- |
 |URL|Enlace completo del video.|https://www.youtube.com/watch?v=PnMMBJiT338|
-|Ruta de salida|Ruta donde se alojará el archivo.|C:/Users/User/Subtitulos|
-|Formato de salida|Formato en el que se descargarán los subtítulos (ej srt, vtt, lrc, best, ass), por default es srt.|srt|
-|Archivo de Cookies|Ruta al archivo de cookies de la página del video, se puede obtener con la extensión Get cookies txt https//goo.su/Grmma|C:/Subtitulos/cookies.txt|
+|Ruta de salida|Ruta hacia la carpeta donde se descargará el archivo.|C:/Users/User/Subtitulos|
+|Formato de salida|Formato en el que se descargarán los subtítulos (ej srt, vtt, lrc, best, ass), por default es vtt.|vtt|
 |Idioma|Código del idioma (ej es, en, fr). Ejecutar el comando 'Subtítulos disponibles' para ver los códigos de idiomas disponibles para un video.|es|
 |Asignar resultado a Variable|Variable donde se almacenará True o False dependiendo del éxito del comando.|Variable|

@@ -23,412 +23,307 @@ Para instalar librerias se debe ingresar por terminal a la carpeta "libs"
     pip install <package> -t .
 
 """
-
-import os
-import glob
-import sys
+import os, shutil, subprocess, json
 
 base_path = tmp_global_obj["basepath"]
-cur_path = base_path + 'modules' + os.sep + 'YT-dlp' + os.sep + 'libs' + os.sep
-if cur_path not in sys.path:
-    sys.path = [cur_path] + sys.path
-    
-from yt_dlp import YoutubeDL
-import os
 
+def _find_yt_dlp(custom_path: str = None) -> str:
+    """
+    Busca yt-dlp:
+    - si custom_path viene: usa ese
+    - si no: busca yt-dlp en PATH
+    """
+    if custom_path and custom_path.strip():
+        p = custom_path.strip().strip('"')
+        if os.path.isfile(p):
+            return p
+        if p.lower() in ["yt-dlp", "yt-dlp.exe"]:
+            return "yt-dlp"
+        raise Exception(f"yt-dlp no encontrado en ruta indicada: {p}")
 
-global build_ydl_opts, simplify_formats
+    exe = shutil.which("yt-dlp") or shutil.which("yt-dlp.exe")
+    if exe:
+        return exe
+    raise Exception("yt-dlp no esta instalado o no está en el PATH. Instalalo o indica yt_dlp_path.")
 
-def build_ydl_opts(params):
+def _run(cmd_list, timeout=None):
+    """
+    Ejecuta comando y retorna (ok, stdout, stderr, returncode)
+    Captura bytes y decodifica manualmente para evitar UnicodeDecodeError (charmap).
+    """
+    p = subprocess.run(
+        cmd_list,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        timeout=timeout
+    )
 
-    ydl_opts = {}
+    out = (p.stdout or b"").decode("utf-8", errors="replace")
+    err = (p.stderr or b"").decode("utf-8", errors="replace")
 
-    output_path = params.get("output_path")
-    if output_path:
-        ydl_opts['outtmpl'] = output_path
-    else:
-        ydl_opts['outtmpl'] = '%(title)s.%(ext)s'
+    ok = (p.returncode == 0)
+    return ok, out, err, p.returncode
 
-    if params.get("quality"):
-        ydl_opts['format'] = params.get("quality")
+def _outtmpl_folder_only(output_folder: str, template: str):
+    """
+    Si output_folder viene vacío, usa Descargas.
+    template debe ser algo tipo "%(title)s.%(ext)s" o "%(playlist_title)s/%(title)s.%(ext)s"
+    """
+    if not output_folder:
+        output_folder = os.path.join(os.path.expanduser("~"), "Downloads")
+    return os.path.join(output_folder, template)
 
-    if params.get("proxy"):
-        ydl_opts['proxy'] = params.get("proxy")
+def simplify_formats(info_json):
+    formats = info_json.get("formats") or []
 
-    return ydl_opts
-
-def simplify_formats(info):
-    formats = info.get("formats", [])
-
-    video_heights = set()
+    heights = set()
     audio_exts = set()
 
     for f in formats:
-
-        if f.get("ext") == "mhtml":
-            continue
-
-        vcodec = f.get("vcodec")
-        acodec = f.get("acodec")
+        vcodec = (f.get("vcodec") or "").lower()
+        acodec = (f.get("acodec") or "").lower()
+        ext = (f.get("ext") or "").lower()
         height = f.get("height")
-        ext = f.get("ext")
 
-        if vcodec != "none" and height:
-            video_heights.add(height)
+        has_video = vcodec and vcodec != "none"
+        has_audio = acodec and acodec != "none"
 
-        if vcodec == "none" and acodec != "none":
-            audio_exts.add(ext)
+        if (not has_video) and has_audio:
+            if ext:
+                audio_exts.add(ext)
 
-    video_list = sorted(
-        [f"{h}p" for h in video_heights]
-    , key=lambda x: int(x.replace("p", "")))
+        if has_video and isinstance(height, int) and height > 0:
+            heights.add(height)
 
-    audio_list = sorted(list(audio_exts))
+    video_qualities = [f"{h}p" for h in sorted(heights)]
+    audio_formats = sorted(audio_exts)
 
     return {
-        "video_qualities": video_list,
-        "audio_formats": audio_list
+        "video_qualities": video_qualities,
+        "audio_formats": audio_formats
     }
 
-"""
-    Obtengo el modulo que fueron invocados
-"""
 module = GetParams("module")
 
-
 if module == "downloadVideo":
+    var_ = GetParams("var_")
+    url = GetParams("url")
+    output_folder = GetParams("output_path")
+    quality = (GetParams("quality") or "best").strip().lower()
+    yt_dlp_path = GetParams("yt_dlp_path")
 
     try:
-        quality = GetParams("quality") or "best" # 360, 360p, 720, 720p, best, worst
-        output_path = GetParams("output_path")
-        proxy = GetParams("proxy")
-        url = GetParams("url")
-        var = GetParams("var_")
-        extra_data = GetParams("extra_data")
-
-        if not output_path:
-            output_path = "%(title)s.%(ext)s"
-
-        quality = quality.lower().strip()
-
+        ytdlp = _find_yt_dlp(yt_dlp_path)
+        outtmpl = _outtmpl_folder_only(output_folder, "%(title)s.%(ext)s")
         if quality in ["best", "worst"]:
-            format_selector = quality
+            fmt = quality
         else:
             if quality.endswith("p"):
-                quality = quality.replace("p", "")
-
+                quality = quality[:-1]
             if not quality.isdigit():
-                raise Exception("Quality invalid")
+                raise Exception("Quality inválida. Usa best/worst o 360/720/1080 o 360p/720p/1080p")
+            fmt = f"bestvideo[height<={quality}]+bestaudio/best[height<={quality}]"
+        cmd = [ytdlp, "-f", fmt, "-o", outtmpl, "--no-abort-on-error"]
+        cmd.append(url)
+        ok, out, err, rc = _run(cmd)
+        SetVar(var_, ok)
 
-            format_selector = f"bestvideo[height<={quality}]+bestaudio/best[height<={quality}]"
-        
-        ffmpeg_path = base_path + 'modules' + os.sep + 'YT-dlp' + os.sep + 'bin' + os.sep
+        if not ok:
+            raise Exception(err.strip() or f"yt-dlp failed (rc={rc})")
 
-        ydl_opts = {
-            "format": format_selector,
-            "outtmpl": output_path,
-            "merge_output_format": "mp4",
-            "ffmpeg_location": ffmpeg_path,
-            "no_warnings": True
-        }
-
-        if proxy:
-            ydl_opts['proxy'] = proxy
-
-        with YoutubeDL(ydl_opts) as ydl:
-            info = ydl.extract_info(url, download=True)
-
-        if extra_data:
-            SetVar(extra_data, info)
-        if var:
-            SetVar(var, True)
     except Exception as e:
         PrintException()
-        import traceback
-        traceback.print_exc()
-        SetVar(var, False)
-
+        SetVar(var_, False)
 
 if module == "downloadAudio":
+    var_ = GetParams("var_")
     try:
         url = GetParams("url")
-        audio_format = GetParams("audio_format") or "best" # mp3, m4a, webm, best
-        var = GetParams("var_")
-        extra_data = GetParams("extra_data")
-        output_path = GetParams("output_path")
+        output_folder = GetParams("output_path")
+        audio_format = (GetParams("audio_format") or "m4a").strip().lower()
+        yt_dlp_path = GetParams("yt_dlp_path")
 
-        if not output_path:
-            output_path = "%(title)s.%(ext)s"
-        
-        ffmpeg_path = base_path + 'modules' + os.sep + 'YT-dlp' + os.sep + 'bin' + os.sep
+        ytdlp = _find_yt_dlp(yt_dlp_path)
+        outtmpl = _outtmpl_folder_only(output_folder, "%(title)s.%(ext)s")
 
-        audio_format = audio_format.lower().strip()
+        cmd = [ytdlp, "-x", "--audio-format", audio_format, "-o", outtmpl, "--no-abort-on-error"]
+        cmd.append(url)
+        ok, out, err, rc = _run(cmd)
 
-        if audio_format == "best":
-            ydl_opts = {
-                "format": "bestaudio",
-                "outtmpl": output_path,
-                "ffmpeg_location": ffmpeg_path,
-                "no_warnings": True
-            }
+        SetVar(var_, ok)
 
-        elif audio_format in ["mp3", "m4a", "webm"]:
-            ydl_opts = {
-                "format": "bestaudio",
-                "outtmpl": output_path,
-                "ffmpeg_location": ffmpeg_path,
-                "no_warnings": True,
-                "postprocessors": [{
-                    "key": "FFmpegExtractAudio",
-                    "preferredcodec": audio_format,
-                }]
-            }
+        if not ok:
+            raise Exception(err.strip() or f"yt-dlp failed (rc={rc})")
 
-        else:
-            raise Exception("Audio format invalid")
-        
-        with YoutubeDL(ydl_opts) as ydl:
-            info = ydl.extract_info(url, download=True)
-
-        if extra_data:
-            SetVar(extra_data, info)
-        if var:
-            SetVar(var, True)
-
-    except Exception as e:
+    except Exception:
         PrintException()
-        SetVar(var, False)
+        SetVar(var_, False)
 
 if module == "downloadPlaylist":
-
+    var_ = GetParams("var_")
+    url = GetParams("url")
+    output_folder = GetParams("output_path")
+    yt_dlp_path = GetParams("yt_dlp_path")
+    limit_str = GetParams("limit")
     try:
-        url = GetParams("url")
-        var = GetParams("var_")
-        extra_data = GetParams("extra_data")
+        ytdlp = _find_yt_dlp(yt_dlp_path)
 
-        ydl_opts = {
-            'outtmpl': GetParams("output_path") or '%(playlist)s/%(title)s.%(ext)s'
-        }
+        outtmpl = _outtmpl_folder_only(output_folder, "%(playlist_title)s/%(title)s.%(ext)s")
 
-        with YoutubeDL(ydl_opts) as ydl:
-            info = ydl.extract_info(url, download=True)
+        cmd = [ytdlp, "-o", outtmpl, "--yes-playlist", "--no-abort-on-error"]
 
-        if extra_data:
-            SetVar(extra_data, info)
-        if var:
-            SetVar(var, True)
+        if limit_str and str(limit_str).strip().isdigit():
+            cmd += ["--playlist-end", str(int(limit_str))]
 
-    except Exception as e:
+        cmd.append(url)
+
+        ok, out, err, rc = _run(cmd)
+        if var_:
+            SetVar(var_, ok)
+        if not ok:
+            raise Exception(err.strip() or f"yt-dlp failed (rc={rc})")
+
+    except Exception:
         PrintException()
-        SetVar(var, False)
-
-
-if module == "getMetadata":
-
-    try:
-        url = GetParams("url")
-        var = GetParams("var_")
-
-        with YoutubeDL({'skip_download': True, "no_warnings": True, "quiet": True}) as ydl:
-            info = ydl.extract_info(url, download=False)
-
-        SetVar(var, info)
-
-    except Exception as e:
-        PrintException()
-        SetVar(var, False)
-
+        if var_:
+            SetVar(var_, False)
 
 if module == "listFormats":
-
+    var_ = GetParams("var_")
     url = GetParams("url")
-    var = GetParams("var_")
-
+    yt_dlp_path = GetParams("yt_dlp_path")
     try:
-        ydl_opts = {
-            "quiet": True,
-            "no_warnings": True,
-            "skip_download": True
-        }
+        ytdlp = _find_yt_dlp(yt_dlp_path)
 
-        with YoutubeDL(ydl_opts) as ydl:
-            info = ydl.extract_info(url, download=False)
+        cmd = [ytdlp, "--no-warnings", "-J", url]
 
-        clean_formats = simplify_formats(info)
+        ok, out, err, rc = _run(cmd)
+        info = json.loads(out) if ok else {}
+        simplified = simplify_formats(info)
+        if var_:
+            SetVar(var_, json.dumps(simplified, ensure_ascii=False))
 
-        SetVar(var, clean_formats)
+        if not ok:
+            raise Exception(err.strip() or f"yt-dlp failed (rc={rc})")
 
-
-    except Exception as e:
+    except Exception:
         PrintException()
-        SetVar(var, False)
+        if var_:
+            SetVar(var_, False)
 
-
-if module == "getAvailableSubtitles":
+if module == "getMetadataJson":
+    var_ = GetParams("var_")
+    json_var = GetParams("json_var")
+    url = GetParams("url")
+    yt_dlp_path = GetParams("yt_dlp_path")
 
     try:
-        url = GetParams("url")
-        var_ = GetParams("var_")
-        proxy = GetParams("proxy")
+        ytdlp = _find_yt_dlp(yt_dlp_path)
+        cmd = [ytdlp, "-J", "--no-warnings", url]
 
-        ydl_opts = {
-            "skip_download": True,
-            "quiet": True,
-            "no_warnings": True,
-        }
+        ok, out, err, rc = _run(cmd, timeout=120)
+        if ok:
+            SetVar(json_var, out)
+        else:
+            SetVar(json_var, err)
+        SetVar(var_, ok)
+        if not ok:
+            raise Exception(err.strip() or f"yt-dlp failed (rc={rc})")
+    except Exception:
+        PrintException()
+        SetVar(var_, False)
 
-        if proxy:
-            ydl_opts["proxy"] = proxy
+elif module == "getAvailableSubtitles":
+    var_ = GetParams("var_")
+    url = GetParams("url")
+    yt_dlp_path = GetParams("yt_dlp_path")
 
-        with YoutubeDL(ydl_opts) as ydl:
-            info = ydl.extract_info(url, download=False)
+    try:
+        ytdlp = _find_yt_dlp(yt_dlp_path)
+        cmd = [ytdlp, "--no-warnings", "-J", url]
+        ok, out, err, rc = _run(cmd, timeout=120)
+
+        if not ok:
+            raise Exception(err.strip() or f"yt-dlp failed (rc={rc})")
+
+        info = json.loads(out)
+        
+        manual = sorted((info.get("subtitles") or {}).keys())
+        automatic = sorted((info.get("automatic_captions") or {}).keys())
 
         result = {
-            "manual_downloadable": [],
-            "automatic_downloadable": []
-        }
+            "manual": manual,
+            "automatic": automatic
+            }
+        
+        if var_:
+            SetVar(var_, json.dumps(result, ensure_ascii=False))
 
-        # 🔹 Manual subtitles
-        manual = info.get("subtitles") or {}
-        for lang, tracks in manual.items():
-            if tracks:
-                # solo si tiene URL real
-                valid = [t for t in tracks if t.get("url")]
-                if valid:
-                    result["manual_downloadable"].append(lang)
-
-        # 🔹 Automatic subtitles
-        auto = info.get("automatic_captions") or {}
-        for lang, tracks in auto.items():
-            if tracks:
-                valid = [t for t in tracks if t.get("url")]
-                if valid:
-                    result["automatic_downloadable"].append(lang)
-
-        SetVar(var_, result)
-
-    except Exception as e:
+    except Exception:
         PrintException()
-        SetVar(var_, {})
-
+        if var_:
+            SetVar(var_, False)
 
 if module == "downloadSubtitles":
+    var_ = GetParams("var_")
+    output_var = GetParams("output_var")
+    url = GetParams("url")
+    language = (GetParams("language") or "en").strip()
+    output_folder = GetParams("output_path")
+    subtitle_format = (GetParams("subtitle_format") or "srt").strip().lower()
+    yt_dlp_path = GetParams("yt_dlp_path")
 
     try:
-        url = GetParams("url")
-        language = GetParams("language")
-        var = GetParams("var_")
-        output_path = GetParams("output_path")
-        cookiefile = GetParams("cookiefile")
-        subtitle_format = (GetParams("subtitle_format") or "srt").strip().lower()
+        ytdlp = _find_yt_dlp(yt_dlp_path)
+        outtmpl = _outtmpl_folder_only(output_folder, "%(title)s.%(ext)s")
+        cmd = [
+            ytdlp,
+            "--skip-download",
+            "--write-subs",
+            "--sub-langs", language,
+            "--sub-format", subtitle_format,
+            "-o", outtmpl,
+            "--no-abort-on-error",
+            "--sleep-subtitles", "60"
+        ]
 
-        if os.path.isdir(output_path):
-            output_path = os.path.join(output_path, "%(title)s.%(ext)s")
+        cmd.append(url)
+        ok, out, err, rc = _run(cmd)
 
-        ydl_opts = {
-            'skip_download': True,
-            'writesubtitles': True,
-            'subtitleslangs': [language],
-            'quiet': True,
-            'no_warnings': True,
-            'outtmpl': output_path
-        }
-        if cookiefile:
-            ydl_opts["cookiefile"] = cookiefile
-        if subtitle_format:
-            ydl_opts["subtitlesformat"] = subtitle_format
+        SetVar(var_, ok)
 
-        deno_exe = base_path + 'modules' + os.sep + 'YT-dlp' + os.sep + 'bin' + os.sep + 'deno' + os.sep + 'deno.exe'
-
-        ydl_opts["js_runtimes"] = {
-            "deno": {
-                "path": deno_exe
-            }
-        } 
-
-        ok = False
-        last_err = None
-        for attempt in range(1, 4):
-            try:
-                with YoutubeDL(ydl_opts) as ydl:
-                    ydl.extract_info(url, download=True)
-                ok = True
-                break
-            except Exception as e:
-                last_err = e
-                msg = str(e)
-                if "HTTP Error 429" in msg:
-                    from time import sleep
-                    sleep(3 * attempt)
-                    continue
-                raise
-
-        SetVar(var_, bool(ok))
-        if not ok and last_err:
-            safe = str(last_err).encode("utf-8", "backslashreplace").decode("utf-8")
-            print("YT-DLP subtitles failed:", safe)
-
-    except Exception as e:
+        if not ok:
+            raise Exception(err.strip() or f"yt-dlp failed (rc={rc})")
+    except Exception:
         PrintException()
-
+        SetVar(var_, False)
 
 if module == "downloadAutoSubtitles":
-
+    var_ = GetParams("var_")
+    url = GetParams("url")
+    language = (GetParams("language") or "en").strip()
+    output_folder = GetParams("output_path")
+    subtitle_format = (GetParams("subtitle_format") or "vtt").strip().lower()
+    yt_dlp_path = GetParams("yt_dlp_path")
     try:
-        url = GetParams("url")
-        language = (GetParams("language") or "en").strip()
-        var_ = GetParams("var_")
-        output_path = GetParams("output_path")
-        proxy = GetParams("proxy")
-        cookiefile = GetParams("cookiefile")
-        subtitle_format = (GetParams("subtitle_format") or "srt").strip().lower()
+        ytdlp = _find_yt_dlp(yt_dlp_path)
+        outtmpl = _outtmpl_folder_only(output_folder, "%(title)s.%(ext)s")
+        cmd = [
+            ytdlp,
+            "--skip-download",
+            "--write-auto-subs",
+            "--sub-langs", language,
+            "--sub-format", subtitle_format,
+            "-o", outtmpl,
+            "--no-abort-on-error",
+            "--sleep-subtitles", "60"
+        ]
 
-        if os.path.isdir(output_path):
-            output_path = os.path.join(output_path, "%(title)s.%(ext)s")
-
-        QUIET = False
-
-        ydl_opts = {
-            "skip_download": True,
-            "writeautomaticsub": True,
-            "writesubtitles": False,
-            "subtitleslangs": [language],
-            "subtitlesformat": subtitle_format,
-            "outtmpl": output_path,
-            "quiet": QUIET,
-            "no_warnings": QUIET,
-        }
-
-        if cookiefile:
-            ydl_opts["cookiefile"] = cookiefile
-
-        deno_exe = base_path + 'modules' + os.sep + 'YT-dlp' + os.sep + 'bin' + os.sep + 'deno' + os.sep + 'deno.exe'
-
-        ydl_opts["js_runtimes"] = {
-            "deno": {
-                "path": deno_exe
-            }
-        }        
-        ok = False
-        last_err = None
-        for attempt in range(1, 4):
-            try:
-                with YoutubeDL(ydl_opts) as ydl:
-                    ydl.extract_info(url, download=True)
-                ok = True
-                break
-            except Exception as e:
-                last_err = e
-                msg = str(e)
-                if "HTTP Error 429" in msg:
-                    from time import sleep
-                    sleep(3 * attempt)
-                    continue
-                raise
-
-        SetVar(var_, bool(ok))
-        if not ok and last_err:
-            safe = str(last_err).encode("utf-8", "backslashreplace").decode("utf-8")
-            print("YT-DLP subtitles failed:", safe)
-    except Exception as e:
+        cmd.append(url)
+        ok, out, err, rc = _run(cmd)
+        SetVar(var_, ok)
+        if not ok:
+            raise Exception(err.strip() or f"yt-dlp failed (rc={rc})")
+    except Exception:
         PrintException()
+        SetVar(var_, False)

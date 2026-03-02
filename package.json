@@ -15,7 +15,7 @@
   "mac": false,
   "docker": false,
   "name": "YT-dlp",
-  "dependencies": {"yt-dlp": "2024.06.06"},
+  "dependencies": {},
   "title": {
     "en": "YT-dlp",
     "es": "YT-dlp",
@@ -62,22 +62,17 @@
             "css": "col-md-12"
           },
           {
-            "type": "input",
-            "placeholder": "C:/Videos/%(title)s.%(ext)s",
+            "type": "folder_select",
+            "placeholder": "C:/Users/User/Videos",
             "description": {
-              "es": "Ruta, nombre del archivo a guardar. Soporta variables internas de yt-dlp, para titulo original y extension usar: %(title)s.%(ext)s.",
-              "en": "Output template of the file. Supports yt-dlp internal variables, for title and extension use: %(title)s.%(ext)s.",
-              "pr": "Modelo de saída do arquivo. Suporta variáveis internas do yt-dlp, para títolo e extensão usar: %(title)s.%(ext)s."
+              "es": "Ruta de la carpeta donde se descargará el video.",
+              "en": "Path of the folder where the video will be downloaded.",
+              "pr": "Caminho da pasta onde o vídeo será baixado."
             },
             "title": {
-              "es": "Plantilla de salida:",
-              "en": "Output template:",
-              "pr": "Modelo de saída:"
-            },
-            "help": {
-              "es": "Ver https://github.com/yt-dlp/yt-dlp#output-template para más información.",
-              "en": "See https://github.com/yt-dlp/yt-dlp#output-template for more information.",
-              "pr": "Veja https://github.com/yt-dlp/yt-dlp#output-template para mais informação."
+              "es": "Ruta de salida:",
+              "en": "Output path:",
+              "pr": "Caminho de saída:"
             },
             "id": "output_path",
             "css": "col-md-12"
@@ -104,19 +99,19 @@
             "css": "col-md-6"
           },
           {
-            "type": "input",
+            "type": "folder_select",
+            "placeholder": "C:/Tools/yt-dlp.exe",
             "description": {
-              "es": "Proxy HTTP/HTTPS para la descarga.",
-              "en": "HTTP/HTTPS proxy for download.",
-              "pr": "Proxy HTTP/HTTPS para download."
+              "es": "Opcional. Ruta al ejecutable yt-dlp.",
+              "en": "Optional. Path of the folder where yt-dlp is installed.",
+              "pr": "Opcional. Caminho da pasta onde o yt-dlp está instalado."
             },
-            "placeholder": "http://user:pass@127.0.0.1:8080",
             "title": {
-              "es": "Proxy:",
-              "en": "Proxy:",
-              "pr": "Proxy:"
+              "es": "Ruta a yt-dlp:",
+              "en": "yt-dlp Path:",
+              "pr": "Caminho do yt-dlp:"
             },
-            "id": "proxy",
+            "id": "yt_dlp_path",
             "css": "col-md-6"
           },
           {
@@ -139,28 +134,6 @@
             },
             "remove_vars": true,
             "id": "var_",
-            "css": "col-md-6"
-          },
-          {
-            "type": "input",
-            "description": {
-              "es": "Variable donde se almacenará el JSON completo del video descargado.",
-              "en": "Variable where the complete JSON of the downloaded video will be stored.",
-              "pr": "Variável onde o JSON completo do vídeo baixado será armazenado."
-            },
-            "placeholder": "Variable",
-            "title": {
-              "es": "Extra data:",
-              "en": "Extra data:",
-              "pr": "Dados extras:"
-            },
-            "help": {
-              "es": "Nombre de variable sin {}",
-              "en": "Variable name without {}",
-              "pr": "Nome da variabel em chaves {}"
-            },
-            "remove_vars": true,
-            "id": "extra_data",
             "css": "col-md-6"
           }
         ]
@@ -217,22 +190,17 @@
             "css": "col-md-12"
           },
           {
-            "type": "input",
-            "placeholder": "C:/Audios/%(title)s.%(ext)s",
+            "type": "folder_select",
+            "placeholder": "C:/Users/User/Audios",
             "description": {
-              "es": "Ruta, nombre del archivo a guardar. Soporta variables internas de yt-dlp, para titulo original y extension usar: %(title)s.%(ext)s.",
-              "en": "Output template of the file. Supports yt-dlp internal variables, for title and extension use: %(title)s.%(ext)s.",
-              "pr": "Modelo de saída do arquivo. Suporta variáveis internas do yt-dlp, para títolo e extensão usar: %(title)s.%(ext)s."
+              "es": "Ruta hacia la carpeta donde se descargará el audio.",
+              "en": "Path of the folder where the audio will be downloaded.",
+              "pr": "Caminho da pasta onde o áudio será baixado."
             },
             "title": {
-              "es": "Plantilla de salida:",
-              "en": "Output template:",
-              "pr": "Modelo de saída:"
-            },
-            "help": {
-              "es": "Ver https://github.com/yt-dlp/yt-dlp#output-template para más información.",
-              "en": "See https://github.com/yt-dlp/yt-dlp#output-template for more information.",
-              "pr": "Veja https://github.com/yt-dlp/yt-dlp#output-template para mais informação."
+              "es": "Ruta de salida:",
+              "en": "Output path:",
+              "pr": "Caminho de saída:"
             },
             "id": "output_path",
             "css": "col-md-12"
@@ -273,28 +241,6 @@
             },
             "remove_vars": true,
             "id": "var_",
-            "css": "col-md-6"
-          },
-          {
-            "type": "input",
-            "description": {
-              "es": "Variable donde se almacenará el JSON completo del audio descargado.",
-              "en": "Variable where the complete JSON of the downloaded audio will be stored.",
-              "pr": "Variável onde o JSON completo do áudio baixado será armazenado."
-            },
-            "placeholder": "Variable",
-            "title": {
-              "es": "Extra data:",
-              "en": "Extra data:",
-              "pr": "Dados extras:"
-            },
-            "help": {
-              "es": "Nombre de variable sin {}",
-              "en": "Variable name without {}",
-              "pr": "Nome da variabel em chaves {}"
-            },
-            "remove_vars": true,
-            "id": "extra_data",
             "css": "col-md-6"
           }
         ]
@@ -351,22 +297,17 @@
             "css": "col-md-12"
           },
           {
-            "type": "input",
-            "placeholder": "C:/Users/User/Playlists/%(playlist)s/%(title)s.%(ext)s",
+            "type": "folder_select",
+            "placeholder": "C:/Users/User/Playlists",
             "description": {
-              "es": "Ruta, nombre del archivo a guardar. Soporta variables internas de yt-dlp, para titulo original y extension usar: %(title)s.%(ext)s.",
-              "en": "Output template of the file. Supports yt-dlp internal variables, for title and extension use: %(title)s.%(ext)s.",
-              "pr": "Modelo de saída do arquivo. Suporta variáveis internas do yt-dlp, para títolo e extensão usar: %(title)s.%(ext)s."
+              "es": "Ruta hacia la carpeta donde se descargarán los archivos.",
+              "en": "Path of the folder where the files will be downloaded.",
+              "pr": "Caminho da pasta onde os arquivos serão baixados."
             },
             "title": {
-              "es": "Plantilla de salida:",
-              "en": "Output template:",
-              "pr": "Modelo de saída:"
-            },
-            "help": {
-              "es": "Ver https://github.com/yt-dlp/yt-dlp#output-template para más información.",
-              "en": "See https://github.com/yt-dlp/yt-dlp#output-template for more information.",
-              "pr": "Veja https://github.com/yt-dlp/yt-dlp#output-template para mais informação."
+              "es": "Ruta de descarga:",
+              "en": "Output path:",
+              "pr": "Caminho de saída:"
             },
             "id": "output_path",
             "css": "col-md-12"
@@ -391,29 +332,7 @@
             },
             "remove_vars": true,
             "id": "var_",
-            "css": "col-md-6"
-          },
-          {
-            "type": "input",
-            "description": {
-              "es": "Variable donde se almacenará el JSON completo de la playlist descargada.",
-              "en": "Variable where the complete JSON of the downloaded playlist will be stored.",
-              "pr": "Variável onde o JSON completo da playlist baixada será armazenado."
-            },
-            "placeholder": "Variable",
-            "title": {
-              "es": "Extra data:",
-              "en": "Extra data:",
-              "pr": "Dados extras:"
-            },
-            "help": {
-              "es": "Nombre de variable sin {}",
-              "en": "Variable name without {}",
-              "pr": "Nome da variabel em chaves {}"
-            },
-            "remove_vars": true,
-            "id": "extra_data",
-            "css": "col-md-6"
+            "css": "col-md-12"
           }
         ]
       },
@@ -469,6 +388,22 @@
             "css": "col-md-12"
           },
           {
+            "type": "folder_select",
+            "placeholder": "C:/Tools/yt-dlp",
+            "description": {
+              "es": "Opcional. Ruta de la carpeta donde se encuentra yt-dlp.",
+              "en": "Optional. Path of the folder where yt-dlp is installed.",
+              "pr": "Opcional. Caminho da pasta onde o yt-dlp está instalado."
+            },
+            "title": {
+              "es": "Ruta a yt-dlp:",
+              "en": "yt-dlp Path:",
+              "pr": "Caminho do yt-dlp:"
+            },
+            "id": "yt_dlp_path",
+            "css": "col-md-12"
+          },
+          {
             "type": "input",
             "description": {
               "es": "Variable donde se almacenará el resultado del comando.",
@@ -488,7 +423,7 @@
             },
             "remove_vars": true,
             "id": "var_",
-            "css": "col-md-6"
+            "css": "col-md-12"
           }
         ]
       },
@@ -563,7 +498,7 @@
             },
             "remove_vars": true,
             "id": "var_",
-            "css": "col-md-6"
+            "css": "col-md-12"
           }
         ]
       },
@@ -638,7 +573,7 @@
             },
             "remove_vars": true,
             "id": "var_",
-            "css": "col-md-6"
+            "css": "col-md-12"
           }
         ]
       },
@@ -697,9 +632,9 @@
             "type": "folder_select",
             "placeholder": "C:/Users/User/Subtitulos",
             "description": {
-              "es": "Ruta donde se guardarán los subtítulos.",
-              "en": "Output path where subtitles will be saved.",
-              "pr": "Caminho onde os subtítulos serão salvos."
+              "es": "Ruta haciala carpeta donde se descargarán los subtítulos.",
+              "en": "Output path where subtitles will be downloaded.",
+              "pr": "Caminho onde os subtítulos serão baixados."
             },
             "title": {
               "es": "Ruta de salida:",
@@ -724,22 +659,6 @@
               "pr": "Formato de saída dos subtítulos (ex: srt, vtt, lrc, best, ass), "
             },
             "id": "subtitle_format",
-            "css": "col-md-6"
-          },
-          {
-            "type": "file_select",
-            "placeholder": "C:/Subtitulos/cookies.txt",
-            "description": {
-              "es": "Ruta al archivo de cookies de la página del video, se puede obtener con la extensión Get cookies txt https://goo.su/Grmma",
-              "en": "Path to the cookies file of the video page, it can be obtained with the Get cookies txt extension https://goo.su/Grmma",
-              "pr": "Caminho para o arquivo de cookies da página do vídeo, pode ser obtido com a extensão Get cookies txt https://goo.su/Grmma"
-            },
-            "title": {
-              "es": "Archivo de Cookies:",
-              "en": "Cookies file:",
-              "pr": "Arquivo de cookies:"
-            },
-            "id": "cookiefile",
             "css": "col-md-6"
           },
           {
@@ -837,9 +756,9 @@
             "type": "folder_select",
             "placeholder": "C:/Users/User/Subtitulos",
             "description": {
-              "es": "Ruta donde se alojará el archivo.",
-              "en": "Path where the file will be saved.",
-              "pr": "Caminho onde o arquivo será salvo."
+              "es": "Ruta hacia la carpeta donde se descargará el archivo.",
+              "en": "Path where the file will be downloaded.",
+              "pr": "Caminho onde o arquivo será baixado."
             },
             "title": {
               "es": "Ruta de salida:",
@@ -851,34 +770,18 @@
           },
           {
             "type": "input",
-            "placeholder": "srt",
+            "placeholder": "vtt",
             "title": {
               "es": "Formato de salida:",
               "en": "Output Format:",
               "pr": "Formato de saída:"
             },
             "description": {
-              "es": "Formato en el que se descargarán los subtítulos (ej: srt, vtt, lrc, best, ass), por default es srt.",
-              "en": "Output format of the subtitles (e.g. srt, vtt, lrc, best, ass), by default is srt.",
-              "pr": "Formato de saída dos subtítulos (ex: srt, vtt, lrc, best, ass), "
+              "es": "Formato en el que se descargarán los subtítulos (ej: srt, vtt, lrc, best, ass), por default es vtt.",
+              "en": "Output format of the subtitles (e.g. srt, vtt, lrc, best, ass), by default is vtt.",
+              "pr": "Formato de saída dos subtítulos (ex: srt, vtt, lrc, best, ass), por default é vtt."
             },
             "id": "subtitle_format",
-            "css": "col-md-6"
-          },
-          {
-            "type": "file_select",
-            "placeholder": "C:/Subtitulos/cookies.txt",
-            "description": {
-              "es": "Ruta al archivo de cookies de la página del video, se puede obtener con la extensión Get cookies txt https://goo.su/Grmma",
-              "en": "Path to the cookies file of the video page, it can be obtained with the Get cookies txt extension https://goo.su/Grmma",
-              "pr": "Caminho para o arquivo de cookies da página do vídeo, pode ser obtido com a extensão Get cookies txt https://goo.su/Grmma"
-            },
-            "title": {
-              "es": "Archivo de Cookies:",
-              "en": "Cookies file:",
-              "pr": "Arquivo de cookies:"
-            },
-            "id": "cookiefile",
             "css": "col-md-6"
           },
           {

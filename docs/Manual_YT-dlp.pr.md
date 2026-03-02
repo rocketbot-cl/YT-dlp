@@ -16,6 +16,43 @@ Para instalar o módulo no Rocketbot Studio, pode ser feito de duas formas:
 2. Automático: Ao entrar no Rocketbot Studio na margem direita você encontrará a seção **Addons**, selecione **Install Mods**, procure o módulo desejado e aperte instalar.  
 
 
+
+## Como usar este módulo
+Antes de usar este módulo, você precisa instalar duas ferramentas:
+
+1. Instale o yt-dlp
+
+    1.1 Baixe o arquivo yt-dlp.exe de:
+
+    https://github.com/yt-dlp/yt-dlp/releases/latest
+
+    1.2 Crie uma pasta e coloque o executável dentro dela, por exemplo:
+
+        C:\yt-dlp\yt-dlp.exe
+
+    1.3 Adicione esta pasta à variável de ambiente PATH do seu sistema:
+
+    Sistema → Variáveis ​​de Ambiente → Editar PATH → Adicionar
+
+        C:\yt-dlp
+
+2. Instale o FFmpeg
+
+    2.1 Acesse:
+
+    https://www.gyan.dev/ffmpeg/builds/
+
+    e baixe o arquivo .zip:
+
+        ffmpeg-release-essentials.zip
+
+    2.2 Extraia-o para uma pasta, por exemplo:
+
+        C:\ffmpeg\
+
+    2.3 Adicionar ao PATH:
+
+        C:\ffmpeg\bin
 ## Descrição do comando
 
 ### Baixar Vídeo
@@ -24,11 +61,10 @@ Baixe um vídeo de uma URL, permitindo definir qualidade, proxy e caminho de sa�
 |Parâmetros|Descrição|exemplo|
 | --- | --- | --- |
 |URL|Link completo do vídeo para baixar.|https://www.youtube.com/watch?v=PnMMBJiT338|
-|Modelo de saída|Modelo de saída do arquivo. Suporta variáveis internas do yt-dlp, para títolo e extensão usar %(title)s.%(ext)s.|C:/Videos/%(title)s.%(ext)s|
+|Caminho de saída|Caminho da pasta onde o vídeo será baixado.|C:/Users/User/Videos|
 |Qualidade|Qualidade específica do vídeo. Execute o comando Listar Formatos para ver as qualidades disponíveis para um vídeo específico. Por padrão a melhor qualidade disponível será baixada.|best|
-|Proxy|Proxy HTTP/HTTPS para download.|http://user:pass@127.0.0.1:8080|
+|Caminho do yt-dlp|Opcional. Caminho da pasta onde o yt-dlp está instalado.|C:/Tools/yt-dlp.exe|
 |Atribuir resultado à variável|Variável onde True ou False serão armazenados dependendo do sucesso do comando.|Variable|
-|Dados extras|Variável onde o JSON completo do vídeo baixado será armazenado.|Variable|
 
 ### Baixar Audio
   
@@ -36,10 +72,9 @@ Baixe um audio de uma URL, e converta para o formato desejado.
 |Parâmetros|Descrição|exemplo|
 | --- | --- | --- |
 |URL|Link completo do áudio para baixar.|https://www.youtube.com/watch?v=PnMMBJiT338|
-|Modelo de saída|Modelo de saída do arquivo. Suporta variáveis internas do yt-dlp, para títolo e extensão usar %(title)s.%(ext)s.|C:/Audios/%(title)s.%(ext)s|
+|Caminho de saída|Caminho da pasta onde o áudio será baixado.|C:/Users/User/Audios|
 |Formato de Áudio|Formato específico do áudio. Execute o comando Listar Formatos para ver as opções disponíveis para um áudio específico. Por padrão a melhor qualidade disponível será baixada.|mp3|
 |Atribuir resultado à variável|Variável onde True ou False serão armazenados dependendo do sucesso do comando.|Variable|
-|Dados extras|Variável onde o JSON completo do áudio baixado será armazenado.|Variable|
 
 ### Baixar Playlist
   
@@ -47,9 +82,8 @@ Baixe todos os vídeos de uma playlist.
 |Parâmetros|Descrição|exemplo|
 | --- | --- | --- |
 |URL|Link completo da playlist para baixar.|https://www.youtube.com/watch?v=PnMMBJiT338|
-|Modelo de saída|Modelo de saída do arquivo. Suporta variáveis internas do yt-dlp, para títolo e extensão usar %(title)s.%(ext)s.|C:/Users/User/Playlists/%(playlist)s/%(title)s.%(ext)s|
+|Caminho de saída|Caminho da pasta onde os arquivos serão baixados.|C:/Users/User/Playlists|
 |Atribuir resultado à variável|Variável onde True ou False serão armazenados dependendo do sucesso do comando.|Variable|
-|Dados extras|Variável onde o JSON completo da playlist baixada será armazenado.|Variable|
 
 ### Listar Formatos
   
@@ -57,6 +91,7 @@ Liste todos os formatos disponíveis para um vídeo.
 |Parâmetros|Descrição|exemplo|
 | --- | --- | --- |
 |URL|Link completo do video.|https://www.youtube.com/watch?v=PnMMBJiT338|
+|Caminho do yt-dlp|Opcional. Caminho da pasta onde o yt-dlp está instalado.|C:/Tools/yt-dlp|
 |Atribuir resultado à variável|Variável onde o resultado do comando será armazenado.|Variable|
 
 ### Obtener Metadados
@@ -81,9 +116,8 @@ Baixe legendas manuais em idioma especifico.
 |Parâmetros|Descrição|exemplo|
 | --- | --- | --- |
 |URL|Link completo do vídeo.|https://www.youtube.com/watch?v=PnMMBJiT338|
-|Caminho de saída|Caminho onde os subtítulos serão salvos.|C:/Users/User/Subtitulos|
+|Caminho de saída|Caminho onde os subtítulos serão baixados.|C:/Users/User/Subtitulos|
 |Formato de saída|Formato de saída dos subtítulos (ex srt, vtt, lrc, best, ass), |srt|
-|Arquivo de cookies|Caminho para o arquivo de cookies da página do vídeo, pode ser obtido com a extensão Get cookies txt https//goo.su/Grmma|C:/Subtitulos/cookies.txt|
 |Idioma|Código do idioma (ex es, en, fr). Execute o comando 'Legendas disponíveis' para ver os códigos de idiomas disponíveis para um vídeo.|es|
 |Atribuir resultado à variável|Variável onde True ou False serão armazenados dependendo do sucesso do comando.|Variable|
 
@@ -93,8 +127,7 @@ Baixe legendas automáticas em idioma especifico.
 |Parâmetros|Descrição|exemplo|
 | --- | --- | --- |
 |URL|Link completo do vídeo.|https://www.youtube.com/watch?v=PnMMBJiT338|
-|Caminho de saída|Caminho onde o arquivo será salvo.|C:/Users/User/Subtitulos|
-|Formato de saída|Formato de saída dos subtítulos (ex srt, vtt, lrc, best, ass), |srt|
-|Arquivo de cookies|Caminho para o arquivo de cookies da página do vídeo, pode ser obtido com a extensão Get cookies txt https//goo.su/Grmma|C:/Subtitulos/cookies.txt|
+|Caminho de saída|Caminho onde o arquivo será baixado.|C:/Users/User/Subtitulos|
+|Formato de saída|Formato de saída dos subtítulos (ex srt, vtt, lrc, best, ass), por default é vtt.|vtt|
 |Idioma|Código do idioma (ex es, en, fr). Execute o comando 'Legendas disponíveis' para ver os códigos de idiomas disponíveis para um vídeo.|es|
 |Atribuir resultado à variável|Variável onde True ou False serão armazenados dependendo do sucesso do comando.|Variable|
