@@ -32,7 +32,7 @@ Antes de usar este módulo, você precisa instalar duas ferramentas:
 
     1.3 Adicione esta pasta à variável de ambiente PATH do seu sistema:
 
-    Sistema → Variáveis ​​de Ambiente → Editar PATH → Adicionar
+    Sistema → Variáveis ​​de Ambiente → Variáveis ​​do sistema → Editar PATH → Adicionar
 
         C:\yt-dlp
 
@@ -62,8 +62,8 @@ Baixe um vídeo de uma URL, permitindo definir qualidade, proxy e caminho de sa�
 | --- | --- | --- |
 |URL|Link completo do vídeo para baixar.|https://www.youtube.com/watch?v=PnMMBJiT338|
 |Caminho de saída|Caminho da pasta onde o vídeo será baixado.|C:/Users/User/Videos|
+|Caminho do yt-dlp|Opcional. Caminho da pasta onde o yt-dlp está instalado, para casos em que ocorre um erro por não o encontrar.|C:/Tools/yt-dlp.exe|
 |Qualidade|Qualidade específica do vídeo. Execute o comando Listar Formatos para ver as qualidades disponíveis para um vídeo específico. Por padrão a melhor qualidade disponível será baixada.|best|
-|Caminho do yt-dlp|Opcional. Caminho da pasta onde o yt-dlp está instalado.|C:/Tools/yt-dlp.exe|
 |Atribuir resultado à variável|Variável onde True ou False serão armazenados dependendo do sucesso do comando.|Variable|
 
 ### Baixar Audio

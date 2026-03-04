@@ -32,7 +32,7 @@ https://github.com/yt-dlp/yt-dlp/releases/latest
 
     1.3 Añadir esta carpeta a la ruta del sistema:
 
-    Sistema → Variables de entorno → Editar PATH →     Añadir
+    Sistema → Variables de entorno → Variables del sistema → Editar PATH → Añadir
 
         C:\yt-dlp
 
@@ -63,8 +63,8 @@ Descarga un video desde una URL, permitiendo definir calidad, proxy y ruta de sa
 | --- | --- | --- |
 |URL|Enlace completo del video a descargar.|https://www.youtube.com/watch?v=PnMMBJiT338|
 |Ruta de salida|Ruta de la carpeta donde se descargará el video.|C:/Users/User/Videos|
+|Ruta a yt-dlp|Opcional. Ruta al ejecutable yt-dlp, para los casos en los que de error por no encontrarlo.|C:/Tools/yt-dlp.exe|
 |Calidad|Calidad específica del video. Ejecutar el comando Listar Formatos para ver las calidades disponibles para un video específico. Por default se descargará la mejor calidad disponible.|best|
-|Ruta a yt-dlp|Opcional. Ruta al ejecutable yt-dlp.|C:/Tools/yt-dlp.exe|
 |Asignar resultado a Variable|Variable donde se almacenará True o False dependiendo del éxito del comando.|Variable|
 
 ### Descargar Audio

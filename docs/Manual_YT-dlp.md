@@ -31,7 +31,7 @@ Before using this module, you need to install two tools:
 
     1.3 Add this folder to your system's PATH environment variable:
 
-    System → Environment Variables → Edit PATH → Add
+    System → Environment Variables → System variables → Edit PATH → Add
 
         C:\yt-dlp
 
@@ -64,8 +64,8 @@ Download a video from a URL, allowing to define quality, proxy and output path.
 | --- | --- | --- |
 |URL|Full link of the video to download.|https://www.youtube.com/watch?v=PnMMBJiT338|
 |Output path|Path of the folder where the video will be downloaded.|C:/Users/User/Videos|
+|yt-dlp Path|Optional. Path of the folder where yt-dlp is installed, for cases where an error occurs due to not finding it.|C:/Tools/yt-dlp.exe|
 |Quality|Specific quality of the video. Run the List Formats command to see the available qualities for a specific video. By default the best available quality will be downloaded.|best|
-|yt-dlp Path|Optional. Path of the folder where yt-dlp is installed.|C:/Tools/yt-dlp.exe|
 |Assign result to a Variable|Variable where True or False will be stored depending on the success of the command.|Variable|
 
 ### Download Audio

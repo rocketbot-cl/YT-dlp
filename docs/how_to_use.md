@@ -14,7 +14,7 @@ Before using this module, you need to install two tools:
 
     1.3 Add this folder to your system's PATH environment variable:
 
-    System → Environment Variables → Edit PATH → Add
+    System → Environment Variables → System variables → Edit PATH → Add
 
         C:\yt-dlp
 
@@ -54,7 +54,7 @@ https://github.com/yt-dlp/yt-dlp/releases/latest
 
     1.3 Añadir esta carpeta a la ruta del sistema:
 
-    Sistema → Variables de entorno → Editar PATH →     Añadir
+    Sistema → Variables de entorno → Variables del sistema → Editar PATH → Añadir
 
         C:\yt-dlp
 
@@ -92,7 +92,7 @@ Antes de usar este módulo, você precisa instalar duas ferramentas:
 
     1.3 Adicione esta pasta à variável de ambiente PATH do seu sistema:
 
-    Sistema → Variáveis ​​de Ambiente → Editar PATH → Adicionar
+    Sistema → Variáveis ​​de Ambiente → Variáveis ​​do sistema → Editar PATH → Adicionar
 
         C:\yt-dlp
 

@@ -78,6 +78,22 @@
             "css": "col-md-12"
           },
           {
+            "type": "file_select",
+            "placeholder": "C:/Tools/yt-dlp.exe",
+            "description": {
+              "es": "Opcional. Ruta al ejecutable yt-dlp, para los casos en los que de error por no encontrarlo.",
+              "en": "Optional. Path of the folder where yt-dlp is installed, for cases where an error occurs due to not finding it.",
+              "pr": "Opcional. Caminho da pasta onde o yt-dlp está instalado, para casos em que ocorre um erro por não o encontrar."
+            },
+            "title": {
+              "es": "Ruta a yt-dlp:",
+              "en": "yt-dlp Path:",
+              "pr": "Caminho do yt-dlp:"
+            },
+            "id": "yt_dlp_path",
+            "css": "col-md-12"
+          },
+          {
             "type": "input",
             "placeholder": "best",
             "description": {
@@ -96,22 +112,6 @@
               "pr": "360, 360p, 720, 720p, best, worst"
             },
             "id": "quality",
-            "css": "col-md-6"
-          },
-          {
-            "type": "folder_select",
-            "placeholder": "C:/Tools/yt-dlp.exe",
-            "description": {
-              "es": "Opcional. Ruta al ejecutable yt-dlp.",
-              "en": "Optional. Path of the folder where yt-dlp is installed.",
-              "pr": "Opcional. Caminho da pasta onde o yt-dlp está instalado."
-            },
-            "title": {
-              "es": "Ruta a yt-dlp:",
-              "en": "yt-dlp Path:",
-              "pr": "Caminho do yt-dlp:"
-            },
-            "id": "yt_dlp_path",
             "css": "col-md-6"
           },
           {
