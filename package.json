@@ -1,0 +1,841 @@
+{
+  "author": "Corina Suarez - Rocketbot",
+  "description": "Module to obtain videos, audio and subtitles from multiple compatible platforms with yt-dlp.",
+    "description_lang": {
+    "es": "Módulo para obtener videos, audios y subtítulos desde múltiples plataformas compatibles con yt-dlp.",
+    "en": "Module to obtain videos, audio and subtitles from multiple compatible platforms with yt-dlp.",
+    "pr": "Módulo para obtener videos, audios y subtítulos desde múltiples plataformas compatibles con yt-dlp."
+  },
+  "disclaimer": "THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU. SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION.",
+  "version": "1.0.0",
+  "license": "MIT",
+  "homepage": "http://rocketbot.com",
+  "linux": false,
+  "windows": true,
+  "mac": false,
+  "docker": false,
+  "name": "YT-dlp",
+  "dependencies": {},
+  "title": {
+    "en": "YT-dlp",
+    "es": "YT-dlp",
+    "pr": "YT-dlp"
+  },
+  "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAD+0lEQVR4nOxaTUwkRRT+qruZP7qZlQwusu4KrK6tcNGDnIzGQELcGDUSOXIwy4XoweiBE4OQcCDhIJI9mBgvELNHgZioHPw57MELiSuguxqzqIRZkJnuZXqm/0yV1bOzhJ5hhoTOJP0lk65+XVXv+169etWTtKSq6usAPgXQhsZCBsA1oqrqbgOS95ARGpg8RZsQNIPTIhQQNEIBQSMUEDRCAUEjFBA0QgFBQzoLJ69oGl66fx+3IxF8mUzi/Uym9Cwjivikrf4X4jMRMKBpeCOXw41kEgnHwdsHB6VnPzQ3n2ruM0mh7mKRXX+PRvGvKOK9CxdwKxr93xaJnGruigIGBgagqmrNk8q2jVdzORZ50XVLAv6IRGAIAr5RFMRcl9nucAERx8HLus5+j1gWXtR1vJnNotWyKvryTSFFUTA9PY14PI6lpSUsLCxA07Sq5J82DHx29y5abZvdr8kyZMdhbS/akuvikieKr8SVQgHXt7dZeyMaxTOFAmv/I0m42t2NvHB8rH1XgJIdHR3F1tYWRkZGsLKygv7+/qoCPtjdZeSp449TKTxrGMxuEIK/mppYu7NYRBPv74nyVoliPR7HF+fOsfZjloXnDg99/VVMofX1dQwPD2N8fByWZWF+fh5zc3O+/ZtcFy9wZ+n2dlxPpfBVSwu7p6niEsLaV3h090UR+5L0kICtaBST7e346Px52GXz1iWAwnEcrK6uYnl5md339PT49u0sFOBtyVuxGLt6OfwbTxWKp7iAcls3t/3CbY9aFkT+bLvCRq9aRvv6+jAxMYGuri5sbm4inU779r3Mo5gVBOyJ4kNkb5eRvezZyoh18rF3eD9vLhPAn/UIkGUZU1NTGBwchK7rmJmZweLiImzb9p3scdNk1wxNC0IQd5wSkeNW4Fduo5XqCT42yzerl4p0nMVTryYBlHQymcTa2homJyeRKTs9/ZDnjp4sFpHe2WEVySuXlMjEzg4Ux8ElTvaqpiHhuviuuRkR3u+d/X08bxh4LZtl918rSkWfFVNobGwM+Xy+KnEP3yoK3r13D0nHwVsHB/gpkWB2nRBWlfo1DamyFaRR1gQBf/ONTKO/EYux+k9xM5HA562t9Qs4Sr63t5edB8dhdnaWlVpas3sMg0W8SAg6TBMFujKEYPTiRXYGlCMniqVo0zEfdnTgxuEhdEHAz7QQVEifqgKOwjRN31QyeL3fkyR8L8sl+570wMUGr0xH4e0TutFtQnCzhvejmgTQQ21oaKiWISfCcWX1pDiTt9FqWGlpYTX/xzreTImqqv7HXAOg4f+RhQKCRiggaIQCgkYoIGiEAoJGKCBoCPyrj0YF+9jjWoOKYJ/b/BcAAP//7iBvZVAJkUwAAAAASUVORK5CYII=",
+  "children": [
+    {
+      "en": {
+        "title": "Download Video",
+        "description": "Download a video, allowing to define the desired quality.",
+        "title_options": "Select Option",
+        "options": null
+      },
+      "es": {
+        "title": "Descargar Video",
+        "description": "Descarga un video, permitiendo definir la calidad deseada.",
+        "title_options": "Seleccione una opción",
+        "options": null
+      },
+      "pr": {
+        "title": "Baixar Vídeo",
+        "description": "Baixe um vídeo, permitindo definir a qualidade desejada.",
+        "title_options": "Selecione uma opção",
+        "options": null
+      },
+      "form": {
+        "css": "modal-lg",
+        "inputs": [
+          {
+            "type": "input",
+            "placeholder": "https://www.youtube.com/watch?v=PnMMBJiT338",
+            "title": {
+              "es": "URL o ID:",
+              "en": "URL or ID:",
+              "pr": "URL ou ID:"
+            },
+            "description": {
+              "es": "Enlace completo del video a descargar, o el ID del video.",
+              "en": "Full link of the video to download, or the video ID.",
+              "pr": "Link completo do vídeo para baixar, ou o ID do vídeo."
+            },
+            "id": "url",
+            "css": "col-md-12"
+          },
+          {
+            "type": "folder_select",
+            "placeholder": "C:/Users/User/Videos",
+            "description": {
+              "es": "Ruta de la carpeta donde se descargará el video.",
+              "en": "Path of the folder where the video will be downloaded.",
+              "pr": "Caminho da pasta onde o vídeo será baixado."
+            },
+            "title": {
+              "es": "Ruta de salida:",
+              "en": "Output path:",
+              "pr": "Caminho de saída:"
+            },
+            "id": "output_path",
+            "css": "col-md-12"
+          },
+          {
+            "type": "file_select",
+            "placeholder": "C:/Tools/yt-dlp.exe",
+            "description": {
+              "es": "Opcional. Ruta al ejecutable yt-dlp, para los casos en los que de error por no encontrarlo.",
+              "en": "Optional. Path of the folder where yt-dlp is installed, for cases where an error occurs due to not finding it.",
+              "pr": "Opcional. Caminho da pasta onde o yt-dlp está instalado, para casos em que ocorre um erro por não o encontrar."
+            },
+            "title": {
+              "es": "Ruta a yt-dlp:",
+              "en": "yt-dlp Path:",
+              "pr": "Caminho do yt-dlp:"
+            },
+            "id": "yt_dlp_path",
+            "css": "col-md-12"
+          },
+          {
+            "type": "input",
+            "placeholder": "best",
+            "description": {
+              "es": "Calidad específica del video. Ejecutar el comando Listar Formatos para ver las calidades disponibles para un video específico. Por default se descargará la mejor calidad disponible.",
+              "en": "Specific quality of the video. Run the List Formats command to see the available qualities for a specific video. By default the best available quality will be downloaded.",
+              "pr": "Qualidade específica do vídeo. Execute o comando Listar Formatos para ver as qualidades disponíveis para um vídeo específico. Por padrão a melhor qualidade disponível será baixada."
+            },
+            "title": {
+              "es": "Calidad:",
+              "en": "Quality:",
+              "pr": "Qualidade:"
+            },
+            "help": {
+              "es": "360, 360p, 720, 720p, best, worst",
+              "en": "360, 360p, 720, 720p, best, worst",
+              "pr": "360, 360p, 720, 720p, best, worst"
+            },
+            "id": "quality",
+            "css": "col-md-6"
+          },
+          {
+            "type": "input",
+            "description": {
+              "es": "Variable donde se almacenará True o False dependiendo del éxito del comando.",
+              "en": "Variable where True or False will be stored depending on the success of the command.",
+              "pr": "Variável onde True ou False serão armazenados dependendo do sucesso do comando."
+            },
+            "placeholder": "Variable",
+            "title": {
+              "es": "Asignar resultado a Variable:",
+              "en": "Assign result to a Variable:",
+              "pr": "Atribuir resultado à variável:"
+            },
+            "help": {
+              "es": "Nombre de variable sin {}",
+              "en": "Variable name without {}",
+              "pr": "Nome da variabel em chaves {}"
+            },
+            "remove_vars": true,
+            "id": "var_",
+            "css": "col-md-6"
+          }
+        ]
+      },
+      "video_youtube": "",
+      "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAD+0lEQVR4nOxaTUwkRRT+qruZP7qZlQwusu4KrK6tcNGDnIzGQELcGDUSOXIwy4XoweiBE4OQcCDhIJI9mBgvELNHgZioHPw57MELiSuguxqzqIRZkJnuZXqm/0yV1bOzhJ5hhoTOJP0lk65+XVXv+169etWTtKSq6usAPgXQhsZCBsA1oqrqbgOS95ARGpg8RZsQNIPTIhQQNEIBQSMUEDRCAUEjFBA0QgFBQzoLJ69oGl66fx+3IxF8mUzi/Uym9Cwjivikrf4X4jMRMKBpeCOXw41kEgnHwdsHB6VnPzQ3n2ruM0mh7mKRXX+PRvGvKOK9CxdwKxr93xaJnGruigIGBgagqmrNk8q2jVdzORZ50XVLAv6IRGAIAr5RFMRcl9nucAERx8HLus5+j1gWXtR1vJnNotWyKvryTSFFUTA9PY14PI6lpSUsLCxA07Sq5J82DHx29y5abZvdr8kyZMdhbS/akuvikieKr8SVQgHXt7dZeyMaxTOFAmv/I0m42t2NvHB8rH1XgJIdHR3F1tYWRkZGsLKygv7+/qoCPtjdZeSp449TKTxrGMxuEIK/mppYu7NYRBPv74nyVoliPR7HF+fOsfZjloXnDg99/VVMofX1dQwPD2N8fByWZWF+fh5zc3O+/ZtcFy9wZ+n2dlxPpfBVSwu7p6niEsLaV3h090UR+5L0kICtaBST7e346Px52GXz1iWAwnEcrK6uYnl5md339PT49u0sFOBtyVuxGLt6OfwbTxWKp7iAcls3t/3CbY9aFkT+bLvCRq9aRvv6+jAxMYGuri5sbm4inU779r3Mo5gVBOyJ4kNkb5eRvezZyoh18rF3eD9vLhPAn/UIkGUZU1NTGBwchK7rmJmZweLiImzb9p3scdNk1wxNC0IQd5wSkeNW4Fduo5XqCT42yzerl4p0nMVTryYBlHQymcTa2homJyeRKTs9/ZDnjp4sFpHe2WEVySuXlMjEzg4Ux8ElTvaqpiHhuviuuRkR3u+d/X08bxh4LZtl918rSkWfFVNobGwM+Xy+KnEP3yoK3r13D0nHwVsHB/gpkWB2nRBWlfo1DamyFaRR1gQBf/ONTKO/EYux+k9xM5HA562t9Qs4Sr63t5edB8dhdnaWlVpas3sMg0W8SAg6TBMFujKEYPTiRXYGlCMniqVo0zEfdnTgxuEhdEHAz7QQVEifqgKOwjRN31QyeL3fkyR8L8sl+570wMUGr0xH4e0TutFtQnCzhvejmgTQQ21oaKiWISfCcWX1pDiTt9FqWGlpYTX/xzreTImqqv7HXAOg4f+RhQKCRiggaIQCgkYoIGiEAoJGKCBoCPyrj0YF+9jjWoOKYJ/b/BcAAP//7iBvZVAJkUwAAAAASUVORK5CYII=",
+      "module": "downloadVideo",
+      "module_name": "YT-dlp",
+      "visible": true,
+      "options": false,
+      "father": "module",
+      "group": "scripts",
+      "linux": true,
+      "windows": true,
+      "mac": true,
+      "docker": true
+    },
+    {
+      "en": {
+        "title": "Download Audio",
+        "description": "Download audio from a video URL, and convert it to the desired format.",
+        "title_options": "Select Option",
+        "options": null
+      },
+      "es": {
+        "title": "Descargar Audio",
+        "description": "Descarga el audio de un video desde una URL, y lo convierte al formato deseado.",
+        "title_options": "Seleccione una opción",
+        "options": null
+      },
+      "pr": {
+        "title": "Baixar Audio",
+        "description": "Baixe um audio de uma URL, e converta para o formato desejado.",
+        "title_options": "Selecione uma opção",
+        "options": null
+      },
+      "form": {
+        "css": "modal-lg",
+        "inputs": [
+          {
+            "type": "input",
+            "placeholder": "https://www.youtube.com/watch?v=PnMMBJiT338",
+            "title": {
+              "es": "URL o ID:",
+              "en": "URL or ID:",
+              "pr": "URL ou ID:"
+            },
+            "description": {
+              "es": "Enlace completo del audio a descargar, o el ID del video.",
+              "en": "Full link of the video to download, or the video ID.",
+              "pr": "Link completo do vídeo para baixar, ou o ID do vídeo."
+            },
+            "id": "url",
+            "css": "col-md-12"
+          },
+          {
+            "type": "folder_select",
+            "placeholder": "C:/Users/User/Audios",
+            "description": {
+              "es": "Ruta hacia la carpeta donde se descargará el audio.",
+              "en": "Path of the folder where the audio will be downloaded.",
+              "pr": "Caminho da pasta onde o áudio será baixado."
+            },
+            "title": {
+              "es": "Ruta de salida:",
+              "en": "Output path:",
+              "pr": "Caminho de saída:"
+            },
+            "id": "output_path",
+            "css": "col-md-12"
+          },
+          {
+            "type": "input",
+            "placeholder": "mp3",
+            "description": {
+              "es": "Formato específico del audio. Ejecutar el comando Listar Formatos para ver las opciones disponibles para un audio específico. Por default se descargará la mejor calidad disponible.",
+              "en": "Specific format of the audio. Run the List Formats command to see the available options for a specific audio. By default the best available quality will be downloaded.",
+              "pr": "Formato específico do áudio. Execute o comando Listar Formatos para ver as opções disponíveis para um áudio específico. Por padrão a melhor qualidade disponível será baixada."
+            },
+            "title": {
+              "es": "Formato de Audio:",
+              "en": "Audio Format:",
+              "pr": "Formato de Áudio:"
+            },
+            "id": "audio_format",
+            "css": "col-md-6"
+          },
+          {
+            "type": "input",
+            "description": {
+              "es": "Variable donde se almacenará True o False dependiendo del éxito del comando.",
+              "en": "Variable where True or False will be stored depending on the success of the command.",
+              "pr": "Variável onde True ou False serão armazenados dependendo do sucesso do comando."
+            },
+            "placeholder": "Variable",
+            "title": {
+              "es": "Asignar resultado a Variable:",
+              "en": "Assign result to a Variable:",
+              "pr": "Atribuir resultado à variável:"
+            },
+            "help": {
+              "es": "Nombre de variable sin {}",
+              "en": "Variable name without {}",
+              "pr": "Nome da variabel em chaves {}"
+            },
+            "remove_vars": true,
+            "id": "var_",
+            "css": "col-md-6"
+          }
+        ]
+      },
+      "video_youtube": "",
+      "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAD+0lEQVR4nOxaTUwkRRT+qruZP7qZlQwusu4KrK6tcNGDnIzGQELcGDUSOXIwy4XoweiBE4OQcCDhIJI9mBgvELNHgZioHPw57MELiSuguxqzqIRZkJnuZXqm/0yV1bOzhJ5hhoTOJP0lk65+XVXv+169etWTtKSq6usAPgXQhsZCBsA1oqrqbgOS95ARGpg8RZsQNIPTIhQQNEIBQSMUEDRCAUEjFBA0QgFBQzoLJ69oGl66fx+3IxF8mUzi/Uym9Cwjivikrf4X4jMRMKBpeCOXw41kEgnHwdsHB6VnPzQ3n2ruM0mh7mKRXX+PRvGvKOK9CxdwKxr93xaJnGruigIGBgagqmrNk8q2jVdzORZ50XVLAv6IRGAIAr5RFMRcl9nucAERx8HLus5+j1gWXtR1vJnNotWyKvryTSFFUTA9PY14PI6lpSUsLCxA07Sq5J82DHx29y5abZvdr8kyZMdhbS/akuvikieKr8SVQgHXt7dZeyMaxTOFAmv/I0m42t2NvHB8rH1XgJIdHR3F1tYWRkZGsLKygv7+/qoCPtjdZeSp449TKTxrGMxuEIK/mppYu7NYRBPv74nyVoliPR7HF+fOsfZjloXnDg99/VVMofX1dQwPD2N8fByWZWF+fh5zc3O+/ZtcFy9wZ+n2dlxPpfBVSwu7p6niEsLaV3h090UR+5L0kICtaBST7e346Px52GXz1iWAwnEcrK6uYnl5md339PT49u0sFOBtyVuxGLt6OfwbTxWKp7iAcls3t/3CbY9aFkT+bLvCRq9aRvv6+jAxMYGuri5sbm4inU779r3Mo5gVBOyJ4kNkb5eRvezZyoh18rF3eD9vLhPAn/UIkGUZU1NTGBwchK7rmJmZweLiImzb9p3scdNk1wxNC0IQd5wSkeNW4Fduo5XqCT42yzerl4p0nMVTryYBlHQymcTa2homJyeRKTs9/ZDnjp4sFpHe2WEVySuXlMjEzg4Ux8ElTvaqpiHhuviuuRkR3u+d/X08bxh4LZtl918rSkWfFVNobGwM+Xy+KnEP3yoK3r13D0nHwVsHB/gpkWB2nRBWlfo1DamyFaRR1gQBf/ONTKO/EYux+k9xM5HA562t9Qs4Sr63t5edB8dhdnaWlVpas3sMg0W8SAg6TBMFujKEYPTiRXYGlCMniqVo0zEfdnTgxuEhdEHAz7QQVEifqgKOwjRN31QyeL3fkyR8L8sl+570wMUGr0xH4e0TutFtQnCzhvejmgTQQ21oaKiWISfCcWX1pDiTt9FqWGlpYTX/xzreTImqqv7HXAOg4f+RhQKCRiggaIQCgkYoIGiEAoJGKCBoCPyrj0YF+9jjWoOKYJ/b/BcAAP//7iBvZVAJkUwAAAAASUVORK5CYII=",
+      "module": "downloadAudio",
+      "module_name": "YT-dlp",
+      "visible": true,
+      "options": false,
+      "father": "module",
+      "group": "scripts",
+      "linux": true,
+      "windows": true,
+      "mac": true,
+      "docker": true
+    },
+    {
+      "en": {
+        "title": "Download Playlist",
+        "description": "Download all videos from a playlist.",
+        "title_options": "Select Option",
+        "options": null
+      },
+      "es": {
+        "title": "Descargar Playlist",
+        "description": "Descarga todos los videos de una playlist.",
+        "title_options": "Seleccione una opción",
+        "options": null
+      },
+      "pr": {
+        "title": "Baixar Playlist",
+        "description": "Baixe todos os vídeos de uma playlist.",
+        "title_options": "Selecione uma opção",
+        "options": null
+      },
+      "form": {
+        "css": "modal-lg",
+        "inputs": [
+          {
+            "type": "input",
+            "placeholder": "https://www.youtube.com/watch?v=PnMMBJiT338",
+            "title": {
+              "es": "URL o ID:",
+              "en": "URL or ID:",
+              "pr": "URL ou ID:"
+            },
+            "description": {
+              "es": "Enlace completo de la playlist descargar.",
+              "en": "Full link of the playlist to download.",
+              "pr": "Link completo da playlist para baixar."
+            },
+            "id": "url",
+            "css": "col-md-12"
+          },
+          {
+            "type": "folder_select",
+            "placeholder": "C:/Users/User/Playlists",
+            "description": {
+              "es": "Ruta hacia la carpeta donde se descargarán los archivos.",
+              "en": "Path of the folder where the files will be downloaded.",
+              "pr": "Caminho da pasta onde os arquivos serão baixados."
+            },
+            "title": {
+              "es": "Ruta de descarga:",
+              "en": "Output path:",
+              "pr": "Caminho de saída:"
+            },
+            "id": "output_path",
+            "css": "col-md-12"
+          },
+          {
+            "type": "input",
+            "description": {
+              "es": "Variable donde se almacenará True o False dependiendo del éxito del comando.",
+              "en": "Variable where True or False will be stored depending on the success of the command.",
+              "pr": "Variável onde True ou False serão armazenados dependendo do sucesso do comando."
+            },
+            "placeholder": "Variable",
+            "title": {
+              "es": "Asignar resultado a Variable:",
+              "en": "Assign result to a Variable:",
+              "pr": "Atribuir resultado à variável:"
+            },
+            "help": {
+              "es": "Nombre de variable sin {}",
+              "en": "Variable name without {}",
+              "pr": "Nome da variabel em chaves {}"
+            },
+            "remove_vars": true,
+            "id": "var_",
+            "css": "col-md-12"
+          }
+        ]
+      },
+      "video_youtube": "",
+      "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAD+0lEQVR4nOxaTUwkRRT+qruZP7qZlQwusu4KrK6tcNGDnIzGQELcGDUSOXIwy4XoweiBE4OQcCDhIJI9mBgvELNHgZioHPw57MELiSuguxqzqIRZkJnuZXqm/0yV1bOzhJ5hhoTOJP0lk65+XVXv+169etWTtKSq6usAPgXQhsZCBsA1oqrqbgOS95ARGpg8RZsQNIPTIhQQNEIBQSMUEDRCAUEjFBA0QgFBQzoLJ69oGl66fx+3IxF8mUzi/Uym9Cwjivikrf4X4jMRMKBpeCOXw41kEgnHwdsHB6VnPzQ3n2ruM0mh7mKRXX+PRvGvKOK9CxdwKxr93xaJnGruigIGBgagqmrNk8q2jVdzORZ50XVLAv6IRGAIAr5RFMRcl9nucAERx8HLus5+j1gWXtR1vJnNotWyKvryTSFFUTA9PY14PI6lpSUsLCxA07Sq5J82DHx29y5abZvdr8kyZMdhbS/akuvikieKr8SVQgHXt7dZeyMaxTOFAmv/I0m42t2NvHB8rH1XgJIdHR3F1tYWRkZGsLKygv7+/qoCPtjdZeSp449TKTxrGMxuEIK/mppYu7NYRBPv74nyVoliPR7HF+fOsfZjloXnDg99/VVMofX1dQwPD2N8fByWZWF+fh5zc3O+/ZtcFy9wZ+n2dlxPpfBVSwu7p6niEsLaV3h090UR+5L0kICtaBST7e346Px52GXz1iWAwnEcrK6uYnl5md339PT49u0sFOBtyVuxGLt6OfwbTxWKp7iAcls3t/3CbY9aFkT+bLvCRq9aRvv6+jAxMYGuri5sbm4inU779r3Mo5gVBOyJ4kNkb5eRvezZyoh18rF3eD9vLhPAn/UIkGUZU1NTGBwchK7rmJmZweLiImzb9p3scdNk1wxNC0IQd5wSkeNW4Fduo5XqCT42yzerl4p0nMVTryYBlHQymcTa2homJyeRKTs9/ZDnjp4sFpHe2WEVySuXlMjEzg4Ux8ElTvaqpiHhuviuuRkR3u+d/X08bxh4LZtl918rSkWfFVNobGwM+Xy+KnEP3yoK3r13D0nHwVsHB/gpkWB2nRBWlfo1DamyFaRR1gQBf/ONTKO/EYux+k9xM5HA562t9Qs4Sr63t5edB8dhdnaWlVpas3sMg0W8SAg6TBMFujKEYPTiRXYGlCMniqVo0zEfdnTgxuEhdEHAz7QQVEifqgKOwjRN31QyeL3fkyR8L8sl+570wMUGr0xH4e0TutFtQnCzhvejmgTQQ21oaKiWISfCcWX1pDiTt9FqWGlpYTX/xzreTImqqv7HXAOg4f+RhQKCRiggaIQCgkYoIGiEAoJGKCBoCPyrj0YF+9jjWoOKYJ/b/BcAAP//7iBvZVAJkUwAAAAASUVORK5CYII=",
+      "module": "downloadPlaylist",
+      "module_name": "YT-dlp",
+      "visible": true,
+      "options": false,
+      "father": "module",
+      "group": "scripts",
+      "linux": true,
+      "windows": true,
+      "mac": true,
+      "docker": true
+    },
+    {
+      "en": {
+        "title": "List Formats",
+        "description": "List all available formats for a video.",
+        "title_options": "Select Option",
+        "options": null
+      },
+      "es": {
+        "title": "Listar Formatos",
+        "description": "Lista todos los formatos disponibles para un video.",
+        "title_options": "Seleccione una opción",
+        "options": null
+      },
+      "pr": {
+        "title": "Listar Formatos",
+        "description": "Liste todos os formatos disponíveis para um vídeo.",
+        "title_options": "Selecione uma opção",
+        "options": null
+      },
+      "form": {
+        "css": "modal-lg",
+        "inputs": [
+          {
+            "type": "input",
+            "placeholder": "https://www.youtube.com/watch?v=PnMMBJiT338",
+            "title": {
+              "es": "URL o ID:",
+              "en": "URL or ID:",
+              "pr": "URL ou ID:"
+            },
+            "description": {
+              "es": "Enlace completo del video, o el ID del video.",
+              "en": "Full link of the video to download, or the video ID.",
+              "pr": "Link completo do vídeo para baixar, ou o ID do vídeo."
+            },
+            "id": "url",
+            "css": "col-md-12"
+          },
+          {
+            "type": "folder_select",
+            "placeholder": "C:/Tools/yt-dlp",
+            "description": {
+              "es": "Opcional. Ruta de la carpeta donde se encuentra yt-dlp.",
+              "en": "Optional. Path of the folder where yt-dlp is installed.",
+              "pr": "Opcional. Caminho da pasta onde o yt-dlp está instalado."
+            },
+            "title": {
+              "es": "Ruta a yt-dlp:",
+              "en": "yt-dlp Path:",
+              "pr": "Caminho do yt-dlp:"
+            },
+            "id": "yt_dlp_path",
+            "css": "col-md-12"
+          },
+          {
+            "type": "input",
+            "description": {
+              "es": "Variable donde se almacenará el resultado del comando.",
+              "en": "Variable where the result of the command will be stored.",
+              "pr": "Variável onde o resultado do comando será armazenado."
+            },
+            "placeholder": "Variable",
+            "title": {
+              "es": "Asignar resultado a Variable:",
+              "en": "Assign result to a Variable:",
+              "pr": "Atribuir resultado à variável:"
+            },
+            "help": {
+              "es": "Nombre de variable sin {}",
+              "en": "Variable name without {}",
+              "pr": "Nome da variabel em chaves {}"
+            },
+            "remove_vars": true,
+            "id": "var_",
+            "css": "col-md-12"
+          }
+        ]
+      },
+      "video_youtube": "",
+      "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAD+0lEQVR4nOxaTUwkRRT+qruZP7qZlQwusu4KrK6tcNGDnIzGQELcGDUSOXIwy4XoweiBE4OQcCDhIJI9mBgvELNHgZioHPw57MELiSuguxqzqIRZkJnuZXqm/0yV1bOzhJ5hhoTOJP0lk65+XVXv+169etWTtKSq6usAPgXQhsZCBsA1oqrqbgOS95ARGpg8RZsQNIPTIhQQNEIBQSMUEDRCAUEjFBA0QgFBQzoLJ69oGl66fx+3IxF8mUzi/Uym9Cwjivikrf4X4jMRMKBpeCOXw41kEgnHwdsHB6VnPzQ3n2ruM0mh7mKRXX+PRvGvKOK9CxdwKxr93xaJnGruigIGBgagqmrNk8q2jVdzORZ50XVLAv6IRGAIAr5RFMRcl9nucAERx8HLus5+j1gWXtR1vJnNotWyKvryTSFFUTA9PY14PI6lpSUsLCxA07Sq5J82DHx29y5abZvdr8kyZMdhbS/akuvikieKr8SVQgHXt7dZeyMaxTOFAmv/I0m42t2NvHB8rH1XgJIdHR3F1tYWRkZGsLKygv7+/qoCPtjdZeSp449TKTxrGMxuEIK/mppYu7NYRBPv74nyVoliPR7HF+fOsfZjloXnDg99/VVMofX1dQwPD2N8fByWZWF+fh5zc3O+/ZtcFy9wZ+n2dlxPpfBVSwu7p6niEsLaV3h090UR+5L0kICtaBST7e346Px52GXz1iWAwnEcrK6uYnl5md339PT49u0sFOBtyVuxGLt6OfwbTxWKp7iAcls3t/3CbY9aFkT+bLvCRq9aRvv6+jAxMYGuri5sbm4inU779r3Mo5gVBOyJ4kNkb5eRvezZyoh18rF3eD9vLhPAn/UIkGUZU1NTGBwchK7rmJmZweLiImzb9p3scdNk1wxNC0IQd5wSkeNW4Fduo5XqCT42yzerl4p0nMVTryYBlHQymcTa2homJyeRKTs9/ZDnjp4sFpHe2WEVySuXlMjEzg4Ux8ElTvaqpiHhuviuuRkR3u+d/X08bxh4LZtl918rSkWfFVNobGwM+Xy+KnEP3yoK3r13D0nHwVsHB/gpkWB2nRBWlfo1DamyFaRR1gQBf/ONTKO/EYux+k9xM5HA562t9Qs4Sr63t5edB8dhdnaWlVpas3sMg0W8SAg6TBMFujKEYPTiRXYGlCMniqVo0zEfdnTgxuEhdEHAz7QQVEifqgKOwjRN31QyeL3fkyR8L8sl+570wMUGr0xH4e0TutFtQnCzhvejmgTQQ21oaKiWISfCcWX1pDiTt9FqWGlpYTX/xzreTImqqv7HXAOg4f+RhQKCRiggaIQCgkYoIGiEAoJGKCBoCPyrj0YF+9jjWoOKYJ/b/BcAAP//7iBvZVAJkUwAAAAASUVORK5CYII=",
+      "module": "listFormats",
+      "module_name": "YT-dlp",
+      "visible": true,
+      "options": false,
+      "father": "module",
+      "group": "scripts",
+      "linux": true,
+      "windows": true,
+      "mac": true,
+      "docker": true
+    },
+    {
+      "en": {
+        "title": "Get Metadata",
+        "description": "Get metadata of a video without downloading it.",
+        "title_options": "Select Option",
+        "options": null
+      },
+      "es": {
+        "title": "Obtener Metadata",
+        "description": "Obtiene metadata del video sin descargarlo.",
+        "title_options": "Seleccione una opción",
+        "options": null
+      },
+      "pr": {
+        "title": "Obtener Metadados",
+        "description": "Obtém metadados do vídeo sem baixá-lo.",
+        "title_options": "Selecione uma opção",
+        "options": null
+      },
+      "form": {
+        "css": "modal-lg",
+        "inputs": [
+          {
+            "type": "input",
+            "placeholder": "https://www.youtube.com/watch?v=PnMMBJiT338",
+            "title": {
+              "es": "URL o ID:",
+              "en": "URL or ID:",
+              "pr": "URL ou ID:"
+            },
+            "description": {
+              "es": "Enlace completo del video, o el ID del video.",
+              "en": "Full link of the video to download, or the video ID.",
+              "pr": "Link completo do vídeo para baixar, ou o ID do vídeo."
+            },
+            "id": "url",
+            "css": "col-md-12"
+          },
+          {
+            "type": "input",
+            "description": {
+              "es": "Variable donde se almacenará el resultado del comando.",
+              "en": "Variable where the result of the command will be stored.",
+              "pr": "Variável onde o resultado do comando será armazenado."
+            },
+            "placeholder": "Variable",
+            "title": {
+              "es": "Asignar resultado a Variable:",
+              "en": "Assign result to a Variable:",
+              "pr": "Atribuir resultado à variável:"
+            },
+            "help": {
+              "es": "Nombre de variable sin {}",
+              "en": "Variable name without {}",
+              "pr": "Nome da variabel em chaves {}"
+            },
+            "remove_vars": true,
+            "id": "var_",
+            "css": "col-md-12"
+          }
+        ]
+      },
+      "video_youtube": "",
+      "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAD+0lEQVR4nOxaTUwkRRT+qruZP7qZlQwusu4KrK6tcNGDnIzGQELcGDUSOXIwy4XoweiBE4OQcCDhIJI9mBgvELNHgZioHPw57MELiSuguxqzqIRZkJnuZXqm/0yV1bOzhJ5hhoTOJP0lk65+XVXv+169etWTtKSq6usAPgXQhsZCBsA1oqrqbgOS95ARGpg8RZsQNIPTIhQQNEIBQSMUEDRCAUEjFBA0QgFBQzoLJ69oGl66fx+3IxF8mUzi/Uym9Cwjivikrf4X4jMRMKBpeCOXw41kEgnHwdsHB6VnPzQ3n2ruM0mh7mKRXX+PRvGvKOK9CxdwKxr93xaJnGruigIGBgagqmrNk8q2jVdzORZ50XVLAv6IRGAIAr5RFMRcl9nucAERx8HLus5+j1gWXtR1vJnNotWyKvryTSFFUTA9PY14PI6lpSUsLCxA07Sq5J82DHx29y5abZvdr8kyZMdhbS/akuvikieKr8SVQgHXt7dZeyMaxTOFAmv/I0m42t2NvHB8rH1XgJIdHR3F1tYWRkZGsLKygv7+/qoCPtjdZeSp449TKTxrGMxuEIK/mppYu7NYRBPv74nyVoliPR7HF+fOsfZjloXnDg99/VVMofX1dQwPD2N8fByWZWF+fh5zc3O+/ZtcFy9wZ+n2dlxPpfBVSwu7p6niEsLaV3h090UR+5L0kICtaBST7e346Px52GXz1iWAwnEcrK6uYnl5md339PT49u0sFOBtyVuxGLt6OfwbTxWKp7iAcls3t/3CbY9aFkT+bLvCRq9aRvv6+jAxMYGuri5sbm4inU779r3Mo5gVBOyJ4kNkb5eRvezZyoh18rF3eD9vLhPAn/UIkGUZU1NTGBwchK7rmJmZweLiImzb9p3scdNk1wxNC0IQd5wSkeNW4Fduo5XqCT42yzerl4p0nMVTryYBlHQymcTa2homJyeRKTs9/ZDnjp4sFpHe2WEVySuXlMjEzg4Ux8ElTvaqpiHhuviuuRkR3u+d/X08bxh4LZtl918rSkWfFVNobGwM+Xy+KnEP3yoK3r13D0nHwVsHB/gpkWB2nRBWlfo1DamyFaRR1gQBf/ONTKO/EYux+k9xM5HA562t9Qs4Sr63t5edB8dhdnaWlVpas3sMg0W8SAg6TBMFujKEYPTiRXYGlCMniqVo0zEfdnTgxuEhdEHAz7QQVEifqgKOwjRN31QyeL3fkyR8L8sl+570wMUGr0xH4e0TutFtQnCzhvejmgTQQ21oaKiWISfCcWX1pDiTt9FqWGlpYTX/xzreTImqqv7HXAOg4f+RhQKCRiggaIQCgkYoIGiEAoJGKCBoCPyrj0YF+9jjWoOKYJ/b/BcAAP//7iBvZVAJkUwAAAAASUVORK5CYII=",
+      "module": "getMetadata",
+      "module_name": "YT-dlp",
+      "visible": true,
+      "options": false,
+      "father": "module",
+      "group": "scripts",
+      "linux": true,
+      "windows": true,
+      "mac": true,
+      "docker": true
+    },
+    {
+      "en": {
+        "title": "Available subtitles",
+        "description": "Get list of available manual and automatic subtitles languages.",
+        "title_options": "Select Option",
+        "options": null
+      },
+      "es": {
+        "title": "Subtitulos disponibles",
+        "description": "Obtiene lista de idiomas de subtítulos manuales y automáticos disponibles.",
+        "title_options": "Seleccione una opción",
+        "options": null
+      },
+      "pr": {
+        "title": "Legendas disponíveis",
+        "description": "Obtém lista de idiomas de legendas manuais e automáticas disponíveis.",
+        "title_options": "Selecione uma opção",
+        "options": null
+      },
+      "form": {
+        "css": "modal-lg",
+        "inputs": [
+          {
+            "type": "input",
+            "placeholder": "https://www.youtube.com/watch?v=PnMMBJiT338",
+            "title": {
+              "es": "URL o ID:",
+              "en": "URL or ID:",
+              "pr": "URL ou ID:"
+            },
+            "description": {
+              "es": "Enlace completo del video, o el ID del video.",
+              "en": "Full link of the video to download, or the video ID.",
+              "pr": "Link completo do vídeo para baixar, ou o ID do vídeo."
+            },
+            "id": "url",
+            "css": "col-md-12"
+          },
+          {
+            "type": "input",
+            "description": {
+              "es": "Variable donde se almacenará el resultado del comando.",
+              "en": "Variable where the result of the command will be stored.",
+              "pr": "Variável onde o resultado do comando será armazenado."
+            },
+            "placeholder": "Variable",
+            "title": {
+              "es": "Asignar resultado a Variable:",
+              "en": "Assign result to a Variable:",
+              "pr": "Atribuir resultado à variável:"
+            },
+            "help": {
+              "es": "Nombre de variable sin {}",
+              "en": "Variable name without {}",
+              "pr": "Nome da variabel em chaves {}"
+            },
+            "remove_vars": true,
+            "id": "var_",
+            "css": "col-md-12"
+          }
+        ]
+      },
+      "video_youtube": "",
+      "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAD+0lEQVR4nOxaTUwkRRT+qruZP7qZlQwusu4KrK6tcNGDnIzGQELcGDUSOXIwy4XoweiBE4OQcCDhIJI9mBgvELNHgZioHPw57MELiSuguxqzqIRZkJnuZXqm/0yV1bOzhJ5hhoTOJP0lk65+XVXv+169etWTtKSq6usAPgXQhsZCBsA1oqrqbgOS95ARGpg8RZsQNIPTIhQQNEIBQSMUEDRCAUEjFBA0QgFBQzoLJ69oGl66fx+3IxF8mUzi/Uym9Cwjivikrf4X4jMRMKBpeCOXw41kEgnHwdsHB6VnPzQ3n2ruM0mh7mKRXX+PRvGvKOK9CxdwKxr93xaJnGruigIGBgagqmrNk8q2jVdzORZ50XVLAv6IRGAIAr5RFMRcl9nucAERx8HLus5+j1gWXtR1vJnNotWyKvryTSFFUTA9PY14PI6lpSUsLCxA07Sq5J82DHx29y5abZvdr8kyZMdhbS/akuvikieKr8SVQgHXt7dZeyMaxTOFAmv/I0m42t2NvHB8rH1XgJIdHR3F1tYWRkZGsLKygv7+/qoCPtjdZeSp449TKTxrGMxuEIK/mppYu7NYRBPv74nyVoliPR7HF+fOsfZjloXnDg99/VVMofX1dQwPD2N8fByWZWF+fh5zc3O+/ZtcFy9wZ+n2dlxPpfBVSwu7p6niEsLaV3h090UR+5L0kICtaBST7e346Px52GXz1iWAwnEcrK6uYnl5md339PT49u0sFOBtyVuxGLt6OfwbTxWKp7iAcls3t/3CbY9aFkT+bLvCRq9aRvv6+jAxMYGuri5sbm4inU779r3Mo5gVBOyJ4kNkb5eRvezZyoh18rF3eD9vLhPAn/UIkGUZU1NTGBwchK7rmJmZweLiImzb9p3scdNk1wxNC0IQd5wSkeNW4Fduo5XqCT42yzerl4p0nMVTryYBlHQymcTa2homJyeRKTs9/ZDnjp4sFpHe2WEVySuXlMjEzg4Ux8ElTvaqpiHhuviuuRkR3u+d/X08bxh4LZtl918rSkWfFVNobGwM+Xy+KnEP3yoK3r13D0nHwVsHB/gpkWB2nRBWlfo1DamyFaRR1gQBf/ONTKO/EYux+k9xM5HA562t9Qs4Sr63t5edB8dhdnaWlVpas3sMg0W8SAg6TBMFujKEYPTiRXYGlCMniqVo0zEfdnTgxuEhdEHAz7QQVEifqgKOwjRN31QyeL3fkyR8L8sl+570wMUGr0xH4e0TutFtQnCzhvejmgTQQ21oaKiWISfCcWX1pDiTt9FqWGlpYTX/xzreTImqqv7HXAOg4f+RhQKCRiggaIQCgkYoIGiEAoJGKCBoCPyrj0YF+9jjWoOKYJ/b/BcAAP//7iBvZVAJkUwAAAAASUVORK5CYII=",
+      "module": "getAvailableSubtitles",
+      "module_name": "YT-dlp",
+      "visible": true,
+      "options": false,
+      "father": "module",
+      "group": "scripts",
+      "linux": true,
+      "windows": true,
+      "mac": true,
+      "docker": true
+    },
+    {
+      "en": {
+        "title": "Download Manual Subtitles",
+        "description": "Download manual subtitles in specific language.",
+        "title_options": "Select Option",
+        "options": null
+      },
+      "es": {
+        "title": "Descargar Subtítulos Manuales",
+        "description": "Descarga subtítulos manuales en idioma específico.",
+        "title_options": "Seleccione una opción",
+        "options": null
+      },
+      "pr": {
+        "title": "Baixar Legendas Manuais",
+        "description": "Baixe legendas manuais em idioma especifico.",
+        "title_options": "Selecione uma opção",
+        "options": null
+      },
+      "form": {
+        "css": "modal-lg",
+        "inputs": [
+          {
+            "type": "input",
+            "placeholder": "https://www.youtube.com/watch?v=PnMMBJiT338",
+            "title": {
+              "es": "URL o ID:",
+              "en": "URL or ID:",
+              "pr": "URL ou ID:"
+            },
+            "description": {
+              "es": "Enlace completo del video, o el ID del video.",
+              "en": "Full link of the video to download, or the video ID.",
+              "pr": "Link completo do vídeo para baixar, ou o ID do vídeo."
+            },
+            "id": "url",
+            "css": "col-md-12"
+          },
+          {
+            "type": "folder_select",
+            "placeholder": "C:/Users/User/Subtitulos",
+            "description": {
+              "es": "Ruta haciala carpeta donde se descargarán los subtítulos.",
+              "en": "Output path where subtitles will be downloaded.",
+              "pr": "Caminho onde os subtítulos serão baixados."
+            },
+            "title": {
+              "es": "Ruta de salida:",
+              "en": "Output path:",
+              "pr": "Caminho de saída:"
+            },
+
+            "id": "output_path",
+            "css": "col-md-12"
+          },
+          {
+            "type": "input",
+            "placeholder": "srt",
+            "title": {
+              "es": "Formato de salida:",
+              "en": "Output Format:",
+              "pr": "Formato de saída:"
+            },
+            "description": {
+              "es": "Formato en el que se descargarán los subtítulos (ej: srt, vtt, lrc, best, ass), por default es srt.",
+              "en": "Output format of the subtitles (e.g. srt, vtt, lrc, best, ass), by default is srt.",
+              "pr": "Formato de saída dos subtítulos (ex: srt, vtt, lrc, best, ass), "
+            },
+            "id": "subtitle_format",
+            "css": "col-md-6"
+          },
+          {
+            "type": "input",
+            "placeholder": "es",
+            "title": {
+              "es": "Idioma:",
+              "en": "Language:",
+              "pr": "Idioma:"
+            },
+            "description": {
+              "es": "Código del idioma (ej: es, en, fr). Ejecutar el comando 'Subtítulos disponibles' para ver los códigos de idiomas disponibles para un video.",
+              "en": "Language code (e.g. es, en, fr). Run the 'Available subtitles' command to see the available language codes for a video.",
+              "pr": "Código do idioma (ex: es, en, fr). Execute o comando 'Legendas disponíveis' para ver os códigos de idiomas disponíveis para um vídeo."
+            },
+            "id": "language",
+            "css": "col-md-6"
+          },
+          {
+            "type": "input",
+            "description": {
+              "es": "Variable donde se almacenará True o False dependiendo del éxito del comando.",
+              "en": "Variable where True or False will be stored depending on the success of the command.",
+              "pr": "Variável onde True ou False serão armazenados dependendo do sucesso do comando."
+            },
+            "placeholder": "Variable",
+            "title": {
+              "es": "Asignar resultado a Variable:",
+              "en": "Assign result to a Variable:",
+              "pr": "Atribuir resultado à variável:"
+            },
+            "help": {
+              "es": "Nombre de variable sin {}",
+              "en": "Variable name without {}",
+              "pr": "Nome da variabel em chaves {}"
+            },
+            "remove_vars": true,
+            "id": "var_",
+            "css": "col-md-6"
+          }
+        ]
+      },
+      "video_youtube": "",
+      "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAD+0lEQVR4nOxaTUwkRRT+qruZP7qZlQwusu4KrK6tcNGDnIzGQELcGDUSOXIwy4XoweiBE4OQcCDhIJI9mBgvELNHgZioHPw57MELiSuguxqzqIRZkJnuZXqm/0yV1bOzhJ5hhoTOJP0lk65+XVXv+169etWTtKSq6usAPgXQhsZCBsA1oqrqbgOS95ARGpg8RZsQNIPTIhQQNEIBQSMUEDRCAUEjFBA0QgFBQzoLJ69oGl66fx+3IxF8mUzi/Uym9Cwjivikrf4X4jMRMKBpeCOXw41kEgnHwdsHB6VnPzQ3n2ruM0mh7mKRXX+PRvGvKOK9CxdwKxr93xaJnGruigIGBgagqmrNk8q2jVdzORZ50XVLAv6IRGAIAr5RFMRcl9nucAERx8HLus5+j1gWXtR1vJnNotWyKvryTSFFUTA9PY14PI6lpSUsLCxA07Sq5J82DHx29y5abZvdr8kyZMdhbS/akuvikieKr8SVQgHXt7dZeyMaxTOFAmv/I0m42t2NvHB8rH1XgJIdHR3F1tYWRkZGsLKygv7+/qoCPtjdZeSp449TKTxrGMxuEIK/mppYu7NYRBPv74nyVoliPR7HF+fOsfZjloXnDg99/VVMofX1dQwPD2N8fByWZWF+fh5zc3O+/ZtcFy9wZ+n2dlxPpfBVSwu7p6niEsLaV3h090UR+5L0kICtaBST7e346Px52GXz1iWAwnEcrK6uYnl5md339PT49u0sFOBtyVuxGLt6OfwbTxWKp7iAcls3t/3CbY9aFkT+bLvCRq9aRvv6+jAxMYGuri5sbm4inU779r3Mo5gVBOyJ4kNkb5eRvezZyoh18rF3eD9vLhPAn/UIkGUZU1NTGBwchK7rmJmZweLiImzb9p3scdNk1wxNC0IQd5wSkeNW4Fduo5XqCT42yzerl4p0nMVTryYBlHQymcTa2homJyeRKTs9/ZDnjp4sFpHe2WEVySuXlMjEzg4Ux8ElTvaqpiHhuviuuRkR3u+d/X08bxh4LZtl918rSkWfFVNobGwM+Xy+KnEP3yoK3r13D0nHwVsHB/gpkWB2nRBWlfo1DamyFaRR1gQBf/ONTKO/EYux+k9xM5HA562t9Qs4Sr63t5edB8dhdnaWlVpas3sMg0W8SAg6TBMFujKEYPTiRXYGlCMniqVo0zEfdnTgxuEhdEHAz7QQVEifqgKOwjRN31QyeL3fkyR8L8sl+570wMUGr0xH4e0TutFtQnCzhvejmgTQQ21oaKiWISfCcWX1pDiTt9FqWGlpYTX/xzreTImqqv7HXAOg4f+RhQKCRiggaIQCgkYoIGiEAoJGKCBoCPyrj0YF+9jjWoOKYJ/b/BcAAP//7iBvZVAJkUwAAAAASUVORK5CYII=",
+      "module": "downloadSubtitles",
+      "module_name": "YT-dlp",
+      "visible": true,
+      "options": false,
+      "father": "module",
+      "group": "scripts",
+      "linux": true,
+      "windows": true,
+      "mac": true,
+      "docker": true
+    },
+    {
+      "en": {
+        "title": "Download Automatic Subtitles",
+        "description": "Download automatic subtitles in specific language.",
+        "title_options": "Select Option",
+        "options": null
+      },
+      "es": {
+        "title": "Descargar Subtítulos Automáticos",
+        "description": "Descarga subtítulos automáticos en idioma específico.",
+        "title_options": "Seleccione una opción",
+        "options": null
+      },
+      "pr": {
+        "title": "Baixar Legendas Automáticas",
+        "description": "Baixe legendas automáticas em idioma especifico.",
+        "title_options": "Selecione uma opção",
+        "options": null
+      },
+      "form": {
+        "css": "modal-lg",
+        "inputs": [
+          {
+            "type": "input",
+            "placeholder": "https://www.youtube.com/watch?v=PnMMBJiT338",
+            "title": {
+              "es": "URL o ID:",
+              "en": "URL or ID:",
+              "pr": "URL ou ID:"
+            },
+            "description": {
+              "es": "Enlace completo del video, o el ID del video.",
+              "en": "Full link of the video to download, or the video ID.",
+              "pr": "Link completo do vídeo para baixar, ou o ID do vídeo."
+            },
+            "id": "url",
+            "css": "col-md-12"
+          },
+          {
+            "type": "folder_select",
+            "placeholder": "C:/Users/User/Subtitulos",
+            "description": {
+              "es": "Ruta hacia la carpeta donde se descargará el archivo.",
+              "en": "Path where the file will be downloaded.",
+              "pr": "Caminho onde o arquivo será baixado."
+            },
+            "title": {
+              "es": "Ruta de salida:",
+              "en": "Output path:",
+              "pr": "Caminho de saída:"
+            },
+            "id": "output_path",
+            "css": "col-md-12"
+          },
+          {
+            "type": "input",
+            "placeholder": "vtt",
+            "title": {
+              "es": "Formato de salida:",
+              "en": "Output Format:",
+              "pr": "Formato de saída:"
+            },
+            "description": {
+              "es": "Formato en el que se descargarán los subtítulos (ej: srt, vtt, lrc, best, ass), por default es vtt.",
+              "en": "Output format of the subtitles (e.g. srt, vtt, lrc, best, ass), by default is vtt.",
+              "pr": "Formato de saída dos subtítulos (ex: srt, vtt, lrc, best, ass), por default é vtt."
+            },
+            "id": "subtitle_format",
+            "css": "col-md-6"
+          },
+          {
+            "type": "input",
+            "placeholder": "es",
+            "title": {
+              "es": "Idioma:",
+              "en": "Language:",
+              "pr": "Idioma:"
+            },
+            "description": {
+              "es": "Código del idioma (ej: es, en, fr). Ejecutar el comando 'Subtítulos disponibles' para ver los códigos de idiomas disponibles para un video.",
+              "en": "Language code (e.g. es, en, fr). Run the 'Available subtitles' command to see the available language codes for a video.",
+              "pr": "Código do idioma (ex: es, en, fr). Execute o comando 'Legendas disponíveis' para ver os códigos de idiomas disponíveis para um vídeo."
+            },
+            "id": "language",
+            "css": "col-md-6"
+          },
+          {
+            "type": "input",
+            "description": {
+              "es": "Variable donde se almacenará True o False dependiendo del éxito del comando.",
+              "en": "Variable where True or False will be stored depending on the success of the command.",
+              "pr": "Variável onde True ou False serão armazenados dependendo do sucesso do comando."
+            },
+            "placeholder": "Variable",
+            "title": {
+              "es": "Asignar resultado a Variable:",
+              "en": "Assign result to a Variable:",
+              "pr": "Atribuir resultado à variável:"
+            },
+            "help": {
+              "es": "Nombre de variable sin {}",
+              "en": "Variable name without {}",
+              "pr": "Nome da variabel em chaves {}"
+            },
+            "remove_vars": true,
+            "id": "var_",
+            "css": "col-md-6"
+          }
+        ]
+      },
+      "video_youtube": "",
+      "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAD+0lEQVR4nOxaTUwkRRT+qruZP7qZlQwusu4KrK6tcNGDnIzGQELcGDUSOXIwy4XoweiBE4OQcCDhIJI9mBgvELNHgZioHPw57MELiSuguxqzqIRZkJnuZXqm/0yV1bOzhJ5hhoTOJP0lk65+XVXv+169etWTtKSq6usAPgXQhsZCBsA1oqrqbgOS95ARGpg8RZsQNIPTIhQQNEIBQSMUEDRCAUEjFBA0QgFBQzoLJ69oGl66fx+3IxF8mUzi/Uym9Cwjivikrf4X4jMRMKBpeCOXw41kEgnHwdsHB6VnPzQ3n2ruM0mh7mKRXX+PRvGvKOK9CxdwKxr93xaJnGruigIGBgagqmrNk8q2jVdzORZ50XVLAv6IRGAIAr5RFMRcl9nucAERx8HLus5+j1gWXtR1vJnNotWyKvryTSFFUTA9PY14PI6lpSUsLCxA07Sq5J82DHx29y5abZvdr8kyZMdhbS/akuvikieKr8SVQgHXt7dZeyMaxTOFAmv/I0m42t2NvHB8rH1XgJIdHR3F1tYWRkZGsLKygv7+/qoCPtjdZeSp449TKTxrGMxuEIK/mppYu7NYRBPv74nyVoliPR7HF+fOsfZjloXnDg99/VVMofX1dQwPD2N8fByWZWF+fh5zc3O+/ZtcFy9wZ+n2dlxPpfBVSwu7p6niEsLaV3h090UR+5L0kICtaBST7e346Px52GXz1iWAwnEcrK6uYnl5md339PT49u0sFOBtyVuxGLt6OfwbTxWKp7iAcls3t/3CbY9aFkT+bLvCRq9aRvv6+jAxMYGuri5sbm4inU779r3Mo5gVBOyJ4kNkb5eRvezZyoh18rF3eD9vLhPAn/UIkGUZU1NTGBwchK7rmJmZweLiImzb9p3scdNk1wxNC0IQd5wSkeNW4Fduo5XqCT42yzerl4p0nMVTryYBlHQymcTa2homJyeRKTs9/ZDnjp4sFpHe2WEVySuXlMjEzg4Ux8ElTvaqpiHhuviuuRkR3u+d/X08bxh4LZtl918rSkWfFVNobGwM+Xy+KnEP3yoK3r13D0nHwVsHB/gpkWB2nRBWlfo1DamyFaRR1gQBf/ONTKO/EYux+k9xM5HA562t9Qs4Sr63t5edB8dhdnaWlVpas3sMg0W8SAg6TBMFujKEYPTiRXYGlCMniqVo0zEfdnTgxuEhdEHAz7QQVEifqgKOwjRN31QyeL3fkyR8L8sl+570wMUGr0xH4e0TutFtQnCzhvejmgTQQ21oaKiWISfCcWX1pDiTt9FqWGlpYTX/xzreTImqqv7HXAOg4f+RhQKCRiggaIQCgkYoIGiEAoJGKCBoCPyrj0YF+9jjWoOKYJ/b/BcAAP//7iBvZVAJkUwAAAAASUVORK5CYII=",
+      "module": "downloadAutoSubtitles",
+      "module_name": "YT-dlp",
+      "visible": true,
+      "options": false,
+      "father": "module",
+      "group": "scripts",
+      "linux": true,
+      "windows": true,
+      "mac": true,
+      "docker": true
+    }
+  ]
+}
