@@ -53,15 +53,60 @@ https://www.gyan.dev/ffmpeg/builds/
 
         C:\ffmpeg\bin
 
+## ID de video YouTube
+
+El ID del video de YouTube es una cadena de 11 caracteres (letras, números, - o _), por ejemplo:
+
+    PnMMBJiT338
+
+### Formatos de URL donde aparece el ID:
+
+1. URL estándar (la más común)
+
+    Aquí viene después de v=
+
+        
+        https://www.youtube.com/watch?v=PnMMBJiT338
+
+    ID:
+
+        PnMMBJiT338
+        
+2. URL corta (youtu.be)
+
+        https://youtu.be/PnMMBJiT338
+
+    ID:
+
+        PnMMBJiT338
+
+3. URL con playlist
+
+        https://www.youtube.com/watch?v=PnMMBJiT338&list=RD...
+
+    ID:
+
+        PnMMBJiT338
+
+    La playlist es otro parámetro (list=).
+4. URL embed o shorts
+
+        https://www.youtube.com/embed/PnMMBJiT338
+        https://www.youtube.com/shorts/PnMMBJiT338
+
+    ID:
+
+        PnMMBJiT338
+
 
 ## Descripción de los comandos
 
 ### Descargar Video
   
-Descarga un video desde una URL, permitiendo definir calidad, proxy y ruta de salida.
+Descarga un video, permitiendo definir la calidad deseada.
 |Parámetros|Descripción|ejemplo|
 | --- | --- | --- |
-|URL|Enlace completo del video a descargar.|https://www.youtube.com/watch?v=PnMMBJiT338|
+|URL o ID|Enlace completo del video a descargar, o el ID del video.|https://www.youtube.com/watch?v=PnMMBJiT338|
 |Ruta de salida|Ruta de la carpeta donde se descargará el video.|C:/Users/User/Videos|
 |Ruta a yt-dlp|Opcional. Ruta al ejecutable yt-dlp, para los casos en los que de error por no encontrarlo.|C:/Tools/yt-dlp.exe|
 |Calidad|Calidad específica del video. Ejecutar el comando Listar Formatos para ver las calidades disponibles para un video específico. Por default se descargará la mejor calidad disponible.|best|
@@ -72,7 +117,7 @@ Descarga un video desde una URL, permitiendo definir calidad, proxy y ruta de sa
 Descarga el audio de un video desde una URL, y lo convierte al formato deseado.
 |Parámetros|Descripción|ejemplo|
 | --- | --- | --- |
-|URL|Enlace completo del audio a descargar.|https://www.youtube.com/watch?v=PnMMBJiT338|
+|URL o ID|Enlace completo del audio a descargar, o el ID del video.|https://www.youtube.com/watch?v=PnMMBJiT338|
 |Ruta de salida|Ruta hacia la carpeta donde se descargará el audio.|C:/Users/User/Audios|
 |Formato de Audio|Formato específico del audio. Ejecutar el comando Listar Formatos para ver las opciones disponibles para un audio específico. Por default se descargará la mejor calidad disponible.|mp3|
 |Asignar resultado a Variable|Variable donde se almacenará True o False dependiendo del éxito del comando.|Variable|
@@ -82,7 +127,7 @@ Descarga el audio de un video desde una URL, y lo convierte al formato deseado.
 Descarga todos los videos de una playlist.
 |Parámetros|Descripción|ejemplo|
 | --- | --- | --- |
-|URL|Enlace completo de la playlist descargar.|https://www.youtube.com/watch?v=PnMMBJiT338|
+|URL o ID|Enlace completo de la playlist descargar.|https://www.youtube.com/watch?v=PnMMBJiT338|
 |Ruta de descarga|Ruta hacia la carpeta donde se descargarán los archivos.|C:/Users/User/Playlists|
 |Asignar resultado a Variable|Variable donde se almacenará True o False dependiendo del éxito del comando.|Variable|
 
@@ -91,7 +136,7 @@ Descarga todos los videos de una playlist.
 Lista todos los formatos disponibles para un video.
 |Parámetros|Descripción|ejemplo|
 | --- | --- | --- |
-|URL|Enlace completo del video.|https://www.youtube.com/watch?v=PnMMBJiT338|
+|URL o ID|Enlace completo del video, o el ID del video.|https://www.youtube.com/watch?v=PnMMBJiT338|
 |Ruta a yt-dlp|Opcional. Ruta de la carpeta donde se encuentra yt-dlp.|C:/Tools/yt-dlp|
 |Asignar resultado a Variable|Variable donde se almacenará el resultado del comando.|Variable|
 
@@ -100,7 +145,7 @@ Lista todos los formatos disponibles para un video.
 Obtiene metadata del video sin descargarlo.
 |Parámetros|Descripción|ejemplo|
 | --- | --- | --- |
-|URL|Enlace completo del video.|https://www.youtube.com/watch?v=PnMMBJiT338|
+|URL o ID|Enlace completo del video, o el ID del video.|https://www.youtube.com/watch?v=PnMMBJiT338|
 |Asignar resultado a Variable|Variable donde se almacenará el resultado del comando.|Variable|
 
 ### Subtitulos disponibles
@@ -108,7 +153,7 @@ Obtiene metadata del video sin descargarlo.
 Obtiene lista de idiomas de subtítulos manuales y automáticos disponibles.
 |Parámetros|Descripción|ejemplo|
 | --- | --- | --- |
-|URL|Enlace completo del video.|https://www.youtube.com/watch?v=PnMMBJiT338|
+|URL o ID|Enlace completo del video, o el ID del video.|https://www.youtube.com/watch?v=PnMMBJiT338|
 |Asignar resultado a Variable|Variable donde se almacenará el resultado del comando.|Variable|
 
 ### Descargar Subtítulos Manuales
@@ -116,7 +161,7 @@ Obtiene lista de idiomas de subtítulos manuales y automáticos disponibles.
 Descarga subtítulos manuales en idioma específico.
 |Parámetros|Descripción|ejemplo|
 | --- | --- | --- |
-|URL|Enlace completo del video.|https://www.youtube.com/watch?v=PnMMBJiT338|
+|URL o ID|Enlace completo del video, o el ID del video.|https://www.youtube.com/watch?v=PnMMBJiT338|
 |Ruta de salida|Ruta haciala carpeta donde se descargarán los subtítulos.|C:/Users/User/Subtitulos|
 |Formato de salida|Formato en el que se descargarán los subtítulos (ej srt, vtt, lrc, best, ass), por default es srt.|srt|
 |Idioma|Código del idioma (ej es, en, fr). Ejecutar el comando 'Subtítulos disponibles' para ver los códigos de idiomas disponibles para un video.|es|
@@ -127,7 +172,7 @@ Descarga subtítulos manuales en idioma específico.
 Descarga subtítulos automáticos en idioma específico.
 |Parámetros|Descripción|ejemplo|
 | --- | --- | --- |
-|URL|Enlace completo del video.|https://www.youtube.com/watch?v=PnMMBJiT338|
+|URL o ID|Enlace completo del video, o el ID del video.|https://www.youtube.com/watch?v=PnMMBJiT338|
 |Ruta de salida|Ruta hacia la carpeta donde se descargará el archivo.|C:/Users/User/Subtitulos|
 |Formato de salida|Formato en el que se descargarán los subtítulos (ej srt, vtt, lrc, best, ass), por default es vtt.|vtt|
 |Idioma|Código del idioma (ej es, en, fr). Ejecutar el comando 'Subtítulos disponibles' para ver los códigos de idiomas disponibles para un video.|es|

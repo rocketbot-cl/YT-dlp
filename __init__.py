@@ -211,9 +211,9 @@ if module == "listFormats":
         if var_:
             SetVar(var_, False)
 
-if module == "getMetadataJson":
+if module == "getMetadata":
     var_ = GetParams("var_")
-    json_var = GetParams("json_var")
+    # json_var = GetParams("json_var")
     url = GetParams("url")
     yt_dlp_path = GetParams("yt_dlp_path")
 
@@ -223,17 +223,16 @@ if module == "getMetadataJson":
 
         ok, out, err, rc = _run(cmd, timeout=120)
         if ok:
-            SetVar(json_var, out)
+            SetVar(var_, out)
         else:
-            SetVar(json_var, err)
-        SetVar(var_, ok)
+            SetVar(var_, err)
         if not ok:
             raise Exception(err.strip() or f"yt-dlp failed (rc={rc})")
     except Exception:
         PrintException()
         SetVar(var_, False)
 
-elif module == "getAvailableSubtitles":
+if module == "getAvailableSubtitles":
     var_ = GetParams("var_")
     url = GetParams("url")
     yt_dlp_path = GetParams("yt_dlp_path")

@@ -53,14 +53,61 @@ Antes de usar este módulo, você precisa instalar duas ferramentas:
     2.3 Adicionar ao PATH:
 
         C:\ffmpeg\bin
+
+## ID do vídeo do YouTube
+
+O ID do vídeo do YouTube é uma sequência de 11 caracteres (letras, números, hífens ou sublinhados), por exemplo:
+
+    PnMMBJiT338
+
+### Formatos de URL onde o ID aparece:
+
+1. URL padrão (mais comum)
+
+    Aqui, ele
+ aparece após v=
+
+        https://www.youtube.com/watch?v=PnMMBJiT338
+
+    ID:
+
+        PnMMBJiT338
+
+2. URL curta (youtu.be)
+
+        https://youtu.be/PnMMBJiT338
+
+    ID:
+
+        PnMMBJiT338
+
+3. URL com lista de reprodução
+
+        https://www.youtube.com/watch?v=PnMMBJiT338&list=RD...
+
+    ID:
+
+        PnMMBJiT338
+
+A lista de reprodução é outro parâmetro (list=).
+
+4. Incorporação de URL ou vídeos curtos
+
+        https://www.youtube.com/embed/PnMMBJiT338
+
+        https://www.youtube.com/shorts/PnMMBJiT338
+
+    ID:
+
+        PnMMBJiT338
 ## Descrição do comando
 
 ### Baixar Vídeo
   
-Baixe um vídeo de uma URL, permitindo definir qualidade, proxy e caminho de saída.
+Baixe um vídeo, permitindo definir a qualidade desejada.
 |Parâmetros|Descrição|exemplo|
 | --- | --- | --- |
-|URL|Link completo do vídeo para baixar.|https://www.youtube.com/watch?v=PnMMBJiT338|
+|URL ou ID|Link completo do vídeo para baixar, ou o ID do vídeo.|https://www.youtube.com/watch?v=PnMMBJiT338|
 |Caminho de saída|Caminho da pasta onde o vídeo será baixado.|C:/Users/User/Videos|
 |Caminho do yt-dlp|Opcional. Caminho da pasta onde o yt-dlp está instalado, para casos em que ocorre um erro por não o encontrar.|C:/Tools/yt-dlp.exe|
 |Qualidade|Qualidade específica do vídeo. Execute o comando Listar Formatos para ver as qualidades disponíveis para um vídeo específico. Por padrão a melhor qualidade disponível será baixada.|best|
@@ -71,7 +118,7 @@ Baixe um vídeo de uma URL, permitindo definir qualidade, proxy e caminho de sa�
 Baixe um audio de uma URL, e converta para o formato desejado.
 |Parâmetros|Descrição|exemplo|
 | --- | --- | --- |
-|URL|Link completo do áudio para baixar.|https://www.youtube.com/watch?v=PnMMBJiT338|
+|URL ou ID|Link completo do vídeo para baixar, ou o ID do vídeo.|https://www.youtube.com/watch?v=PnMMBJiT338|
 |Caminho de saída|Caminho da pasta onde o áudio será baixado.|C:/Users/User/Audios|
 |Formato de Áudio|Formato específico do áudio. Execute o comando Listar Formatos para ver as opções disponíveis para um áudio específico. Por padrão a melhor qualidade disponível será baixada.|mp3|
 |Atribuir resultado à variável|Variável onde True ou False serão armazenados dependendo do sucesso do comando.|Variable|
@@ -81,7 +128,7 @@ Baixe um audio de uma URL, e converta para o formato desejado.
 Baixe todos os vídeos de uma playlist.
 |Parâmetros|Descrição|exemplo|
 | --- | --- | --- |
-|URL|Link completo da playlist para baixar.|https://www.youtube.com/watch?v=PnMMBJiT338|
+|URL ou ID|Link completo da playlist para baixar.|https://www.youtube.com/watch?v=PnMMBJiT338|
 |Caminho de saída|Caminho da pasta onde os arquivos serão baixados.|C:/Users/User/Playlists|
 |Atribuir resultado à variável|Variável onde True ou False serão armazenados dependendo do sucesso do comando.|Variable|
 
@@ -90,7 +137,7 @@ Baixe todos os vídeos de uma playlist.
 Liste todos os formatos disponíveis para um vídeo.
 |Parâmetros|Descrição|exemplo|
 | --- | --- | --- |
-|URL|Link completo do video.|https://www.youtube.com/watch?v=PnMMBJiT338|
+|URL ou ID|Link completo do vídeo para baixar, ou o ID do vídeo.|https://www.youtube.com/watch?v=PnMMBJiT338|
 |Caminho do yt-dlp|Opcional. Caminho da pasta onde o yt-dlp está instalado.|C:/Tools/yt-dlp|
 |Atribuir resultado à variável|Variável onde o resultado do comando será armazenado.|Variable|
 
@@ -99,7 +146,7 @@ Liste todos os formatos disponíveis para um vídeo.
 Obtém metadados do vídeo sem baixá-lo.
 |Parâmetros|Descrição|exemplo|
 | --- | --- | --- |
-|URL|Link completo do video.|https://www.youtube.com/watch?v=PnMMBJiT338|
+|URL ou ID|Link completo do vídeo para baixar, ou o ID do vídeo.|https://www.youtube.com/watch?v=PnMMBJiT338|
 |Atribuir resultado à variável|Variável onde o resultado do comando será armazenado.|Variable|
 
 ### Legendas disponíveis
@@ -107,7 +154,7 @@ Obtém metadados do vídeo sem baixá-lo.
 Obtém lista de idiomas de legendas manuais e automáticas disponíveis.
 |Parâmetros|Descrição|exemplo|
 | --- | --- | --- |
-|URL|Link completo do video.|https://www.youtube.com/watch?v=PnMMBJiT338|
+|URL ou ID|Link completo do vídeo para baixar, ou o ID do vídeo.|https://www.youtube.com/watch?v=PnMMBJiT338|
 |Atribuir resultado à variável|Variável onde o resultado do comando será armazenado.|Variable|
 
 ### Baixar Legendas Manuais
@@ -115,7 +162,7 @@ Obtém lista de idiomas de legendas manuais e automáticas disponíveis.
 Baixe legendas manuais em idioma especifico.
 |Parâmetros|Descrição|exemplo|
 | --- | --- | --- |
-|URL|Link completo do vídeo.|https://www.youtube.com/watch?v=PnMMBJiT338|
+|URL ou ID|Link completo do vídeo para baixar, ou o ID do vídeo.|https://www.youtube.com/watch?v=PnMMBJiT338|
 |Caminho de saída|Caminho onde os subtítulos serão baixados.|C:/Users/User/Subtitulos|
 |Formato de saída|Formato de saída dos subtítulos (ex srt, vtt, lrc, best, ass), |srt|
 |Idioma|Código do idioma (ex es, en, fr). Execute o comando 'Legendas disponíveis' para ver os códigos de idiomas disponíveis para um vídeo.|es|
@@ -126,7 +173,7 @@ Baixe legendas manuais em idioma especifico.
 Baixe legendas automáticas em idioma especifico.
 |Parâmetros|Descrição|exemplo|
 | --- | --- | --- |
-|URL|Link completo do vídeo.|https://www.youtube.com/watch?v=PnMMBJiT338|
+|URL ou ID|Link completo do vídeo para baixar, ou o ID do vídeo.|https://www.youtube.com/watch?v=PnMMBJiT338|
 |Caminho de saída|Caminho onde o arquivo será baixado.|C:/Users/User/Subtitulos|
 |Formato de saída|Formato de saída dos subtítulos (ex srt, vtt, lrc, best, ass), por default é vtt.|vtt|
 |Idioma|Código do idioma (ex es, en, fr). Execute o comando 'Legendas disponíveis' para ver os códigos de idiomas disponíveis para um vídeo.|es|

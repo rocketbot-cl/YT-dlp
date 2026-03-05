@@ -19,7 +19,7 @@ Para instalar el módulo en Rocketbot Studio, se puede hacer de dos formas:
 
 
 1. Descargar Video  
-Descarga un video desde una URL, permitiendo definir calidad, proxy y ruta de salida.
+Descarga un video, permitiendo definir la calidad deseada.
 
 2. Descargar Audio  
 Descarga el audio de un video desde una URL, y lo convierte al formato deseado.

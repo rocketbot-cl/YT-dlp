@@ -53,16 +53,60 @@ Before using this module, you need to install two tools:
 
         C:\ffmpeg\bin
 
+## YouTube Video ID
 
+The YouTube video ID is an 11 character string (letters, numbers, hyphens, or underscores), for example:
+
+    PnMMBJiT338
+
+### URL Formats Where the ID Appears:
+
+1. Standard URL (most common)
+
+    Here it comes after v=
+
+        
+        https://www.youtube.com/watch?v=PnMMBJiT338
+
+    ID:
+
+        PnMMBJiT338
+
+2. Short URL (youtu.be)
+
+        https://youtu.be/PnMMBJiT338
+
+    ID:
+
+        PnMMBJiT338
+
+3. URL with Playlist
+
+        https://www.youtube.com/watch?v=PnMMBJiT338&list=RD...
+
+    ID:
+
+        PnMMBJiT338
+
+The playlist is another parameter (list=).
+
+4. URL embed or shorts 
+
+        https://www.youtube.com/embed/PnMMBJiT338 
+        https://www.youtube.com/shorts/PnMMBJiT338 
+
+    ID: 
+
+        PnMMBJiT338
 
 ## Description of the commands
 
 ### Download Video
   
-Download a video from a URL, allowing to define quality, proxy and output path.
+Download a video, allowing to define the desired quality.
 |Parameters|Description|example|
 | --- | --- | --- |
-|URL|Full link of the video to download.|https://www.youtube.com/watch?v=PnMMBJiT338|
+|URL or ID|Full link of the video to download, or the video ID.|https://www.youtube.com/watch?v=PnMMBJiT338|
 |Output path|Path of the folder where the video will be downloaded.|C:/Users/User/Videos|
 |yt-dlp Path|Optional. Path of the folder where yt-dlp is installed, for cases where an error occurs due to not finding it.|C:/Tools/yt-dlp.exe|
 |Quality|Specific quality of the video. Run the List Formats command to see the available qualities for a specific video. By default the best available quality will be downloaded.|best|
@@ -73,7 +117,7 @@ Download a video from a URL, allowing to define quality, proxy and output path.
 Download audio from a video URL, and convert it to the desired format.
 |Parameters|Description|example|
 | --- | --- | --- |
-|URL|Full link of the audio to download.|https://www.youtube.com/watch?v=PnMMBJiT338|
+|URL or ID|Full link of the video to download, or the video ID.|https://www.youtube.com/watch?v=PnMMBJiT338|
 |Output path|Path of the folder where the audio will be downloaded.|C:/Users/User/Audios|
 |Audio Format|Specific format of the audio. Run the List Formats command to see the available options for a specific audio. By default the best available quality will be downloaded.|mp3|
 |Assign result to a Variable|Variable where True or False will be stored depending on the success of the command.|Variable|
@@ -83,7 +127,7 @@ Download audio from a video URL, and convert it to the desired format.
 Download all videos from a playlist.
 |Parameters|Description|example|
 | --- | --- | --- |
-|URL|Full link of the playlist to download.|https://www.youtube.com/watch?v=PnMMBJiT338|
+|URL or ID|Full link of the playlist to download.|https://www.youtube.com/watch?v=PnMMBJiT338|
 |Output path|Path of the folder where the files will be downloaded.|C:/Users/User/Playlists|
 |Assign result to a Variable|Variable where True or False will be stored depending on the success of the command.|Variable|
 
@@ -92,7 +136,7 @@ Download all videos from a playlist.
 List all available formats for a video.
 |Parameters|Description|example|
 | --- | --- | --- |
-|URL|Full link of the video.|https://www.youtube.com/watch?v=PnMMBJiT338|
+|URL or ID|Full link of the video to download, or the video ID.|https://www.youtube.com/watch?v=PnMMBJiT338|
 |yt-dlp Path|Optional. Path of the folder where yt-dlp is installed.|C:/Tools/yt-dlp|
 |Assign result to a Variable|Variable where the result of the command will be stored.|Variable|
 
@@ -101,7 +145,7 @@ List all available formats for a video.
 Get metadata of a video without downloading it.
 |Parameters|Description|example|
 | --- | --- | --- |
-|URL|Full link of the video.|https://www.youtube.com/watch?v=PnMMBJiT338|
+|URL or ID|Full link of the video to download, or the video ID.|https://www.youtube.com/watch?v=PnMMBJiT338|
 |Assign result to a Variable|Variable where the result of the command will be stored.|Variable|
 
 ### Available subtitles
@@ -109,7 +153,7 @@ Get metadata of a video without downloading it.
 Get list of available manual and automatic subtitles languages.
 |Parameters|Description|example|
 | --- | --- | --- |
-|URL|Full link of the video.|https://www.youtube.com/watch?v=PnMMBJiT338|
+|URL or ID|Full link of the video to download, or the video ID.|https://www.youtube.com/watch?v=PnMMBJiT338|
 |Assign result to a Variable|Variable where the result of the command will be stored.|Variable|
 
 ### Download Manual Subtitles
@@ -117,7 +161,7 @@ Get list of available manual and automatic subtitles languages.
 Download manual subtitles in specific language.
 |Parameters|Description|example|
 | --- | --- | --- |
-|URL|Full link of the video.|https://www.youtube.com/watch?v=PnMMBJiT338|
+|URL or ID|Full link of the video to download, or the video ID.|https://www.youtube.com/watch?v=PnMMBJiT338|
 |Output path|Output path where subtitles will be downloaded.|C:/Users/User/Subtitulos|
 |Output Format|Output format of the subtitles (e.g. srt, vtt, lrc, best, ass), by default is srt.|srt|
 |Language|Language code (e.g. es, en, fr). Run the 'Available subtitles' command to see the available language codes for a video.|es|
@@ -128,7 +172,7 @@ Download manual subtitles in specific language.
 Download automatic subtitles in specific language.
 |Parameters|Description|example|
 | --- | --- | --- |
-|URL|Full link of the video.|https://www.youtube.com/watch?v=PnMMBJiT338|
+|URL or ID|Full link of the video to download, or the video ID.|https://www.youtube.com/watch?v=PnMMBJiT338|
 |Output path|Path where the file will be downloaded.|C:/Users/User/Subtitulos|
 |Output Format|Output format of the subtitles (e.g. srt, vtt, lrc, best, ass), by default is vtt.|vtt|
 |Language|Language code (e.g. es, en, fr). Run the 'Available subtitles' command to see the available language codes for a video.|es|

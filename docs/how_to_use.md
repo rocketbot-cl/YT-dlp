@@ -36,7 +36,50 @@ Before using this module, you need to install two tools:
 
         C:\ffmpeg\bin
 
+## YouTube Video ID
 
+The YouTube video ID is an 11 character string (letters, numbers, hyphens, or underscores), for example:
+
+    PnMMBJiT338
+
+### URL Formats Where the ID Appears:
+
+1. Standard URL (most common)
+
+    Here it comes after v=
+
+        https://www.youtube.com/watch?v=PnMMBJiT338
+
+    ID:
+
+        PnMMBJiT338
+
+2. Short URL (youtu.be)
+
+        https://youtu.be/PnMMBJiT338
+
+    ID:
+
+        PnMMBJiT338
+
+3. URL with Playlist
+
+        https://www.youtube.com/watch?v=PnMMBJiT338&list=RD...
+
+    ID:
+
+        PnMMBJiT338
+
+The playlist is another parameter (list=).
+
+4. URL embed or shorts 
+
+        https://www.youtube.com/embed/PnMMBJiT338 
+        https://www.youtube.com/shorts/PnMMBJiT338 
+
+    ID: 
+
+        PnMMBJiT338
 ---
 
 ## Como usar este modulo
@@ -74,6 +117,50 @@ https://www.gyan.dev/ffmpeg/builds/
     2.3 Añadir al PATH:
 
         C:\ffmpeg\bin
+
+## ID de video YouTube
+
+El ID del video de YouTube es una cadena de 11 caracteres (letras, números, - o _), por ejemplo:
+
+    PnMMBJiT338
+
+### Formatos de URL donde aparece el ID:
+
+1. URL estándar (la más común)
+
+    Aquí viene después de v=
+
+        https://www.youtube.com/watch?v=PnMMBJiT338
+
+    ID:
+
+        PnMMBJiT338
+        
+2. URL corta (youtu.be)
+
+        https://youtu.be/PnMMBJiT338
+
+    ID:
+
+        PnMMBJiT338
+
+3. URL con playlist
+
+        https://www.youtube.com/watch?v=PnMMBJiT338&list=RD...
+
+    ID:
+
+        PnMMBJiT338
+
+    La playlist es otro parámetro (list=).
+4. URL embed o shorts
+
+        https://www.youtube.com/embed/PnMMBJiT338
+        https://www.youtube.com/shorts/PnMMBJiT338
+
+    ID:
+
+        PnMMBJiT338
 
 ---
 
@@ -113,3 +200,49 @@ Antes de usar este módulo, você precisa instalar duas ferramentas:
     2.3 Adicionar ao PATH:
 
         C:\ffmpeg\bin
+
+## ID do vídeo do YouTube
+
+O ID do vídeo do YouTube é uma sequência de 11 caracteres (letras, números, hífens ou sublinhados), por exemplo:
+
+    PnMMBJiT338
+
+### Formatos de URL onde o ID aparece:
+
+1. URL padrão (mais comum)
+
+    Aqui, ele aparece após v=
+
+        https://www.youtube.com/watch?v=PnMMBJiT338
+
+    ID:
+
+        PnMMBJiT338
+
+2. URL curta (youtu.be)
+
+        https://youtu.be/PnMMBJiT338
+
+    ID:
+
+        PnMMBJiT338
+
+3. URL com lista de reprodução
+
+        https://www.youtube.com/watch?v=PnMMBJiT338&list=RD...
+
+    ID:
+
+        PnMMBJiT338
+
+A lista de reprodução é outro parâmetro (list=).
+
+4. Incorporação de URL ou vídeos curtos
+
+        https://www.youtube.com/embed/PnMMBJiT338
+
+        https://www.youtube.com/shorts/PnMMBJiT338
+
+    ID:
+
+        PnMMBJiT338

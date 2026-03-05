@@ -26,19 +26,19 @@
     {
       "en": {
         "title": "Download Video",
-        "description": "Download a video from a URL, allowing to define quality, proxy and output path.",
+        "description": "Download a video, allowing to define the desired quality.",
         "title_options": "Select Option",
         "options": null
       },
       "es": {
         "title": "Descargar Video",
-        "description": "Descarga un video desde una URL, permitiendo definir calidad, proxy y ruta de salida.",
+        "description": "Descarga un video, permitiendo definir la calidad deseada.",
         "title_options": "Seleccione una opción",
         "options": null
       },
       "pr": {
         "title": "Baixar Vídeo",
-        "description": "Baixe um vídeo de uma URL, permitindo definir qualidade, proxy e caminho de saída.",
+        "description": "Baixe um vídeo, permitindo definir a qualidade desejada.",
         "title_options": "Selecione uma opção",
         "options": null
       },
@@ -49,14 +49,14 @@
             "type": "input",
             "placeholder": "https://www.youtube.com/watch?v=PnMMBJiT338",
             "title": {
-              "es": "URL:",
-              "en": "URL:",
-              "pr": "URL:"
+              "es": "URL o ID:",
+              "en": "URL or ID:",
+              "pr": "URL ou ID:"
             },
             "description": {
-              "es": "Enlace completo del video a descargar.",
-              "en": "Full link of the video to download.",
-              "pr": "Link completo do vídeo para baixar."
+              "es": "Enlace completo del video a descargar, o el ID del video.",
+              "en": "Full link of the video to download, or the video ID.",
+              "pr": "Link completo do vídeo para baixar, ou o ID do vídeo."
             },
             "id": "url",
             "css": "col-md-12"
@@ -177,14 +177,14 @@
             "type": "input",
             "placeholder": "https://www.youtube.com/watch?v=PnMMBJiT338",
             "title": {
-              "es": "URL:",
-              "en": "URL:",
-              "pr": "URL:"
+              "es": "URL o ID:",
+              "en": "URL or ID:",
+              "pr": "URL ou ID:"
             },
             "description": {
-              "es": "Enlace completo del audio a descargar.",
-              "en": "Full link of the audio to download.",
-              "pr": "Link completo do áudio para baixar."
+              "es": "Enlace completo del audio a descargar, o el ID del video.",
+              "en": "Full link of the video to download, or the video ID.",
+              "pr": "Link completo do vídeo para baixar, ou o ID do vídeo."
             },
             "id": "url",
             "css": "col-md-12"
@@ -284,9 +284,9 @@
             "type": "input",
             "placeholder": "https://www.youtube.com/watch?v=PnMMBJiT338",
             "title": {
-              "es": "URL:",
-              "en": "URL:",
-              "pr": "URL:"
+              "es": "URL o ID:",
+              "en": "URL or ID:",
+              "pr": "URL ou ID:"
             },
             "description": {
               "es": "Enlace completo de la playlist descargar.",
@@ -375,14 +375,14 @@
             "type": "input",
             "placeholder": "https://www.youtube.com/watch?v=PnMMBJiT338",
             "title": {
-              "es": "URL:",
-              "en": "URL:",
-              "pr": "URL:"
+              "es": "URL o ID:",
+              "en": "URL or ID:",
+              "pr": "URL ou ID:"
             },
             "description": {
-              "es": "Enlace completo del video.",
-              "en": "Full link of the video.",
-              "pr": "Link completo do video."
+              "es": "Enlace completo del video, o el ID del video.",
+              "en": "Full link of the video to download, or the video ID.",
+              "pr": "Link completo do vídeo para baixar, ou o ID do vídeo."
             },
             "id": "url",
             "css": "col-md-12"
@@ -466,14 +466,14 @@
             "type": "input",
             "placeholder": "https://www.youtube.com/watch?v=PnMMBJiT338",
             "title": {
-              "es": "URL:",
-              "en": "URL:",
-              "pr": "URL:"
+              "es": "URL o ID:",
+              "en": "URL or ID:",
+              "pr": "URL ou ID:"
             },
             "description": {
-              "es": "Enlace completo del video.",
-              "en": "Full link of the video.",
-              "pr": "Link completo do video."
+              "es": "Enlace completo del video, o el ID del video.",
+              "en": "Full link of the video to download, or the video ID.",
+              "pr": "Link completo do vídeo para baixar, ou o ID do vídeo."
             },
             "id": "url",
             "css": "col-md-12"
@@ -541,14 +541,14 @@
             "type": "input",
             "placeholder": "https://www.youtube.com/watch?v=PnMMBJiT338",
             "title": {
-              "es": "URL:",
-              "en": "URL:",
-              "pr": "URL:"
+              "es": "URL o ID:",
+              "en": "URL or ID:",
+              "pr": "URL ou ID:"
             },
             "description": {
-              "es": "Enlace completo del video.",
-              "en": "Full link of the video.",
-              "pr": "Link completo do video."
+              "es": "Enlace completo del video, o el ID del video.",
+              "en": "Full link of the video to download, or the video ID.",
+              "pr": "Link completo do vídeo para baixar, ou o ID do vídeo."
             },
             "id": "url",
             "css": "col-md-12"
@@ -616,14 +616,14 @@
             "type": "input",
             "placeholder": "https://www.youtube.com/watch?v=PnMMBJiT338",
             "title": {
-              "es": "URL:",
-              "en": "URL:",
-              "pr": "URL:"
+              "es": "URL o ID:",
+              "en": "URL or ID:",
+              "pr": "URL ou ID:"
             },
             "description": {
-              "es": "Enlace completo del video.",
-              "en": "Full link of the video.",
-              "pr": "Link completo do vídeo."
+              "es": "Enlace completo del video, o el ID del video.",
+              "en": "Full link of the video to download, or the video ID.",
+              "pr": "Link completo do vídeo para baixar, ou o ID do vídeo."
             },
             "id": "url",
             "css": "col-md-12"
@@ -740,14 +740,14 @@
             "type": "input",
             "placeholder": "https://www.youtube.com/watch?v=PnMMBJiT338",
             "title": {
-              "es": "URL:",
-              "en": "URL:",
-              "pr": "URL:"
+              "es": "URL o ID:",
+              "en": "URL or ID:",
+              "pr": "URL ou ID:"
             },
             "description": {
-              "es": "Enlace completo del video.",
-              "en": "Full link of the video.",
-              "pr": "Link completo do vídeo."
+              "es": "Enlace completo del video, o el ID del video.",
+              "en": "Full link of the video to download, or the video ID.",
+              "pr": "Link completo do vídeo para baixar, ou o ID do vídeo."
             },
             "id": "url",
             "css": "col-md-12"
